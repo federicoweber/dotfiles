@@ -1,0 +1,20 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ['~', '~/.config']
+
+- link:
+    ~/bin: bin
+    ~/.config/nvim/init.vim: init.vim
+    ~/.config/termite/config: termite
+    ~/.gitignore_global:
+    ~/.config/i3/config: i3.config
+    ~/.tmux.conf:
+    ~/.zshrc:
+    ~/.xinitrc:
+    ~/.Xmodmap:
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]

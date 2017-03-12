@@ -1,0 +1,13 @@
+# ~/.tmuxinator/arch.yml
+
+name: arch
+root: ~/
+windows:
+  - :
+        cmatrix -C cyan -s -b
+  - :
+        layout: main-horizontal
+        panes:
+                - htop
+                - sudo iftop -c ~/.iftoprc
+                - sudo iotop -o

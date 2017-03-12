@@ -1,0 +1,14 @@
+# ~/.tmuxinator/buffer.yml
+
+name: buffer
+root: ~/Projects/buffer-dev
+
+windows:
+  - : cd buffer-web && fixcolors && nvim -S Session.vim
+  - : ./dev up
+  - :
+      layout: even-vertical
+      panes:
+        - cd buffer-web && tail -f logs/local_error_log
+        - cd buffer-web && tail -f logs/local_access_log
+        - docker exec -it bufferdev_web_1 tail -f /var/log/buffer/buffer.log
