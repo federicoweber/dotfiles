@@ -97,7 +97,7 @@ alias bf="cd ~/Projects/Buffer/buffer-dev && ./dev"
 alias bfup="cd ~/Projects/Buffer/buffer-dev && ./dev up && cd -"
 alias bfstop="cd ~/Projects/Buffer/buffer-dev && ./dev stop && cd -"
 alias bfps="cd ~/Projects/Buffer/buffer-dev && ./dev ps && cd -"
-alias bdc="npm run compile && cp lib/chronos.js ~/Projects/Buffer/buffer-dev/buffer-web/node_modules/@bufferapp/chronos/lib/chronos.js" #Develop Chronos
+alias bbc="npm run compile && cp lib/chronos.js ~/Projects/Buffer/buffer-dev/buffer-web/node_modules/@bufferapp/chronos/lib/chronos.js" #Develop Chronos
 
 # Seneca
 alias snup="cd ~/Projects/seneca-env && docker-compose up -d && docker ps && cd - "
@@ -119,7 +119,7 @@ ZSH_THEME_GIT_PROMPT_AHEAD="%{$bg[blue]%}%{$fg[black]%} %{↑%G%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$bg[blue]%}%{$fg[black]%} %{ %G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-PROMPT='%{$bg[cyan]%}%F{black} %m %F{cyan}%{$bg[black]%}$(git_super_status) %{$bg[black]%}%F{6}%D{%H:%M:%S} %{$bg[default]%}%F{black}
+PROMPT='%{$bg[cyan]%}%F{black} %m %F{cyan}%{$bg[black]%}$(git_super_status)%{$bg[default]%}%F{black}
 %{$bg[default]%}%F{cyan}%n %F{white}%~%F{cyan}/%{$reset_color%} '
 RPROMPT=''
 
@@ -130,3 +130,4 @@ RPROMPT=''
 export PATH="$PATH:./node_modules/.bin"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /usr/share/nvm/init-nvm.sh

@@ -1,6 +1,7 @@
 - yaourt:
   - ack
   - adobe-source-code-pro-fonts
+  - arc-gtk-theme
   - chromium
   - docker
   - fzf

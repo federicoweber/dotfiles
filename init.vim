@@ -8,7 +8,7 @@
     Plug 'arcticicestudio/nord-vim'
     " Color picker & viewer
     Plug 'KabbAmine/vCoolor.vim'
-    Plug 'ap/vim-css-color'
+    Plug 'etdev/vim-hexcolor'
     " Language Sintax
     Plug 'pangloss/vim-javascript'
     " GIT
@@ -92,10 +92,11 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 " disable automatic check
 let g:syntastic_mode_map = { 'mode': 'passive' }
-
-" Enable eslint
+" JS
 let g:syntastic_javascript_checkers = ['standard']
-" let g:syntastic_javascript_standard_exec = '$(npm biddn)/standard'
+" PHP
+let g:syntastic_php_checkers=['php', 'phpcs']
+let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
 
 " disable automatic formatting for php
 let g:phpfmt_autosave = 0
