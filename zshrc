@@ -85,6 +85,7 @@ alias sudo="sudo "
 
 alias vim=nvim
 alias vi=nvim
+alias vims=nvim -S Session.vim
 alias mux=tmuxinator
 alias getip="~/bin/ip.sh"
 alias backup="~/bin/backup.sh"
@@ -93,15 +94,16 @@ alias dlogs="docker logs -f"
 alias lip="~/bin/locateip.sh"
 
 # Buffer
-alias bf="cd ~/Projects/Buffer/buffer-dev && ./dev"
+alias bf="cd ~/Projects/Buffer/buffer-dev"
 alias bfup="cd ~/Projects/Buffer/buffer-dev && ./dev up && cd -"
 alias bfstop="cd ~/Projects/Buffer/buffer-dev && ./dev stop && cd -"
 alias bfps="cd ~/Projects/Buffer/buffer-dev && ./dev ps && cd -"
 alias bbc="npm run compile && cp lib/chronos.js ~/Projects/Buffer/buffer-dev/buffer-web/node_modules/@bufferapp/chronos/lib/chronos.js" #Develop Chronos
 
 # Seneca
-alias snup="cd ~/Projects/seneca-env && docker-compose up -d && docker ps && cd - "
-alias snstop="cd ~/Projects/seneca-env && docker-compose stop && cd -"
+alias sn="cd ~/Projects/Seneca/seneca-env"
+alias snup="cd ~/Projects/Seneca/seneca-env && docker-compose up -d && docker ps && cd - "
+alias snstop="cd ~/Projects/Seneca/seneca-env && docker-compose stop && cd -"
 
 # fix VIM colors in tmus
 alias fixcolors="export TERM='screen-256color'"

@@ -30,6 +30,8 @@
     Plug 'christoomey/vim-tmux-navigator'
     " phpcbf in vim
     Plug 'beanworks/vim-phpfmt'
+    " indentation style with config files
+    Plug 'editorconfig/editorconfig-vim'
 " }
 
 call plug#end()
