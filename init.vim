@@ -32,6 +32,9 @@
     Plug 'beanworks/vim-phpfmt'
     " indentation style with config files
     Plug 'editorconfig/editorconfig-vim'
+    " use Ranger to explore files
+    Plug 'francoiscabrol/ranger.vim'
+    Plug 'rbgrouleff/bclose.vim'
 " }
 
 call plug#end()
@@ -104,15 +107,20 @@ let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
 let g:phpfmt_autosave = 0
 
 " Key bindings
-" Buffer list navigation
+" Buffer navigation
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
-nnoremap <silent> [B :bfirst<CR>
-nnoremap <silent> ]B :blast<CR>
-nnoremap <silent> ]x :bdelete<CR>
+nnoremap <silent> ]q :bdelete<CR>
+" tab navigation
+nnoremap <silent> [t :tabprev<CR>
+nnoremap <silent> ]t :tabnext<CR>
+nnoremap <silent> tn :tabnew<CR>
+nnoremap <silent> tq :tabclose<CR>
 
 " Tools
 map <silent> <C-p> :FZF<CR>
+" Toggle Session recording with Obsession
+map <silent> <leader>o :Obsession<CR>
 
 " This hack is needded to use C-h to navigate splits in nvim see https://github.com/christoomey/vim-tmux-navigator
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
