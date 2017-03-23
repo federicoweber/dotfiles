@@ -13,6 +13,7 @@
     ~/.config/i3status/config: i3/i3status.conf
     ~/.config/nvim/init.vim: init.vim
     ~/.config/ranger/rc.conf: ranger/rc.conf
+    ~/.taskrc:
     ~/.config/termite/config: termite
     ~/.config/dunst: dunst
     ~/.gitignore_global:

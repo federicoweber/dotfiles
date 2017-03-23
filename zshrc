@@ -56,7 +56,7 @@ DEFAULT_USER="fwd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(archlinux docker docker-compose git gitfast git-prompt tmux tmuxinator ssh-agent)
+plugins=(archlinux docker docker-compose git gitfast git-prompt taskwarrior tmux ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -118,7 +118,7 @@ ZSH_THEME_GIT_PROMPT_CONFLICTS="%F{blue}%{$bg[black]%} %{ %G%}"
 ZSH_THEME_GIT_PROMPT_CHANGED="%F{blue}%{$bg[black]%} %{✚ %G%}"
 ZSH_THEME_GIT_PROMPT_BEHIND="%F{blue}%{$bg[black]%} %{↓%G%}"
 ZSH_THEME_GIT_PROMPT_AHEAD="%F{blue}%{$bg[black]%} %{↑%G%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{blue}%{$bg[black]%} %{ %G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{blue}%{$bg[black]%}{ %G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 PROMPT='%{$bg[cyan]%}%F{black} %m %F{cyan}%{$bg[black]%}▓▒░$(git_super_status)%{$bg[default]%}%F{black}▓▒░
