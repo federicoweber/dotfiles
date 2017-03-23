@@ -109,19 +109,19 @@ alias snstop="cd ~/Projects/Seneca/seneca-env && docker-compose stop && cd -"
 alias fixcolors="export TERM='screen-256color'"
 
 # My Theme
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{blue}  %{$bg[blue]%}%F{black}%{$bg[blue]%}%F{blue}%{$fg[black]%  "
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$bg[blue]%} %{$bg[black]%}%F{blue}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{blue}  "
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_SEPARATOR=""
 ZSH_THEME_GIT_PROMPT_BRANCH=""
-ZSH_THEME_GIT_PROMPT_STAGED="%{$bg[blue]%}%{$fg[black]%} %{ %G%}"
-ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$bg[blue]%}%{$fg[black]%} %{ %G%}"
-ZSH_THEME_GIT_PROMPT_CHANGED="%{$bg[blue]%}%{$fg[black]%} %{✚ %G%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%{$bg[blue]%}%{$fg[black]%} %{↓%G%}"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{$bg[blue]%}%{$fg[black]%} %{↑%G%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$bg[blue]%}%{$fg[black]%} %{ %G%}"
+ZSH_THEME_GIT_PROMPT_STAGED="%F{blue}%{$bg[black]%} %{ %G%}"
+ZSH_THEME_GIT_PROMPT_CONFLICTS="%F{blue}%{$bg[black]%} %{ %G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED="%F{blue}%{$bg[black]%} %{✚ %G%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%F{blue}%{$bg[black]%} %{↓%G%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%F{blue}%{$bg[black]%} %{↑%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{blue}%{$bg[black]%} %{ %G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-PROMPT='%{$bg[cyan]%}%F{black} %m %F{cyan}%{$bg[black]%}$(git_super_status)%{$bg[default]%}%F{black}
+PROMPT='%{$bg[cyan]%}%F{black} %m %F{cyan}%{$bg[black]%}▓▒░$(git_super_status)%{$bg[default]%}%F{black}▓▒░
 %{$bg[default]%}%F{cyan}%n %F{white}%~%F{cyan}/%{$reset_color%} '
 RPROMPT=''
 
