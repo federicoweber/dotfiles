@@ -109,20 +109,20 @@ alias snstop="cd ~/Projects/Seneca/seneca-env && docker-compose stop && cd -"
 alias fixcolors="export TERM='screen-256color'"
 
 # My Theme
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{blue}  "
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{cyan} "
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_SEPARATOR=""
 ZSH_THEME_GIT_PROMPT_BRANCH=""
-ZSH_THEME_GIT_PROMPT_STAGED="%F{blue}%{$bg[black]%} %{ %G%}"
-ZSH_THEME_GIT_PROMPT_CONFLICTS="%F{blue}%{$bg[black]%} %{ %G%}"
-ZSH_THEME_GIT_PROMPT_CHANGED="%F{blue}%{$bg[black]%} %{✚ %G%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%F{blue}%{$bg[black]%} %{↓%G%}"
-ZSH_THEME_GIT_PROMPT_AHEAD="%F{blue}%{$bg[black]%} %{↑%G%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{blue}%{$bg[black]%}{ %G%}"
+ZSH_THEME_GIT_PROMPT_STAGED="%F{cyan}%{$bg[black]%} %{ %G%}"
+ZSH_THEME_GIT_PROMPT_CONFLICTS="%F{cyan}%{$bg[black]%} %{ %G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED="%F{cyan}%{$bg[black]%} %{✚ %G%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%F{cyan}%{$bg[black]%} %{↓%G%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%F{cyan}%{$bg[black]%} %{↑%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{cyan}%{$bg[black]%}{ %G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-PROMPT='%{$bg[cyan]%}%F{black} %m %F{cyan}%{$bg[black]%}▓▒░$(git_super_status)%{$bg[default]%}%F{black}▓▒░
-%{$bg[default]%}%F{cyan}%n %F{white}%~%F{cyan}/%{$reset_color%} '
+PROMPT='%{$bg[cyan]%}%F{black} %m %F{cyan}%{$bg[black]%}▓▒░ %F{cyan}%~ $(git_super_status)%{$bg[default]%}%F{black}▓▒░
+%{$bg[default]%}%F{cyan}%n %F{cyan}%{$reset_color%} '
 RPROMPT=''
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
