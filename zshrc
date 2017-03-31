@@ -56,7 +56,7 @@ DEFAULT_USER="fwd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(archlinux docker docker-compose git gitfast git-prompt taskwarrior tmux ssh-agent)
+plugins=(git gitfast git-prompt taskwarrior tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -72,6 +72,7 @@ export EDITOR='nvim'
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
+eval $(keychain --eval --quiet id_rsa)
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -81,29 +82,62 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Here comes some aliases
 # enable aliases in sudo mode http://askubuntu.com/questions/22037/aliases-not-available-when-using-sudo
-alias sudo="sudo "
-
-alias vim=nvim
-alias vi=nvim
-alias vims=nvim -S Session.vim
-alias mux=tmuxinator
-alias getip="~/bin/ip.sh"
 alias backup="~/bin/backup.sh"
-alias dclogs="docker-compose logs -f"
-alias dlogs="docker logs -f"
+alias dcl="docker-compose logs -f"
+alias dl="docker logs -f"
+alias gip="~/bin/ip.sh"
 alias lip="~/bin/locateip.sh"
+alias sudo="sudo "
+alias tm=tmux
+alias tmk='tmux kill-server'
+alias tmks='tmux kill-session -t '
+alias v=nvim
+alias vim=nvim
+alias vs='nvim -S'
+
+# Taskwarrior
+alias ts=tasksh
+alias tcw='task context work && t'
+alias tcp='task context personal && t'
+alias tcn='task context next && t'
+alias tcd='task context delegate && t'
+alias tcx='task context none && t'
+
+# Docker
+alias d=docker
+alias dps="docker ps"
+alias dc=docker-compose
+
+# GIT
+# alias g=git
+# alias ga="git add"
+# alias gaa="git add -all"
+# alias gb="git branch"
+# alias gc="git commit"
+# alias gca="git commit --amend"
+# alias gcm="git commit -m"
+# alias gco="git checkout"
+# alias gcm="git checkout master"
+# alias gf="git fetch --all --prune"
+# alias gp="git push"
+# alias gl="git pull"
+# alias glol="git log --graph --pretty = format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+# alias glola="git log --graph --pretty = format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
+# alias grhh="git reset HEAD --hard"
+# alias gst="git status"
 
 # Buffer
-alias bf="cd ~/Projects/Buffer/buffer-dev"
-alias bfup="cd ~/Projects/Buffer/buffer-dev && ./dev up && cd -"
-alias bfstop="cd ~/Projects/Buffer/buffer-dev && ./dev stop && cd -"
-alias bfps="cd ~/Projects/Buffer/buffer-dev && ./dev ps && cd -"
+alias b="cd ~/Projects/Buffer/buffer-dev"
+alias bw="cd ~/Projects/Buffer/buffer-dev/buffer-web"
+alias bup="cd ~/Projects/Buffer/buffer-dev && ./dev up && cd -"
+alias bstop="cd ~/Projects/Buffer/buffer-dev && ./dev stop && cd -"
+alias bps="cd ~/Projects/Buffer/buffer-dev && ./dev ps && cd -"
 alias bbc="npm run compile && cp lib/chronos.js ~/Projects/Buffer/buffer-dev/buffer-web/node_modules/@bufferapp/chronos/lib/chronos.js" #Develop Chronos
 
 # Seneca
-alias sn="cd ~/Projects/Seneca/seneca-env"
-alias snup="cd ~/Projects/Seneca/seneca-env && docker-compose up -d && docker ps && cd - "
-alias snstop="cd ~/Projects/Seneca/seneca-env && docker-compose stop && cd -"
+alias s="cd ~/Projects/Seneca/seneca-env"
+alias sup="cd ~/Projects/Seneca/seneca-env && docker-compose up -d && docker ps && cd - "
+alias sstop="cd ~/Projects/Seneca/seneca-env && docker-compose stop && cd -"
 
 # fix VIM colors in tmus
 alias fixcolors="export TERM='screen-256color'"
@@ -118,11 +152,11 @@ ZSH_THEME_GIT_PROMPT_CONFLICTS="%F{cyan}%{$bg[black]%} %{ %G%}"
 ZSH_THEME_GIT_PROMPT_CHANGED="%F{cyan}%{$bg[black]%} %{✚ %G%}"
 ZSH_THEME_GIT_PROMPT_BEHIND="%F{cyan}%{$bg[black]%} %{↓%G%}"
 ZSH_THEME_GIT_PROMPT_AHEAD="%F{cyan}%{$bg[black]%} %{↑%G%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{cyan}%{$bg[black]%}{ %G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{cyan}%{$bg[black]%} %{ %G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-PROMPT='%{$bg[cyan]%}%F{black} %m %F{cyan}%{$bg[black]%}▓▒░ %F{cyan}%~ $(git_super_status)%{$bg[default]%}%F{black}▓▒░
-%{$bg[default]%}%F{cyan}%n %F{cyan}%{$reset_color%} '
+PROMPT='%{$bg[cyan]%}%F{black} %~ %F{cyan}%{$bg[black]%}▓▒░ %F{cyan} $(git_super_status)%{$bg[default]%}%F{black}▓▒░
+%{$bg[default]%}%F{cyan} %{$reset_color%} '
 RPROMPT=''
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.

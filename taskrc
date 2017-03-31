@@ -23,8 +23,8 @@ data.location=~/.task
 #include /usr/share/doc/task/rc/dark-blue-256.theme
 #include /usr/share/doc/task/rc/dark-violets-256.theme
 #include /usr/share/doc/task/rc/dark-yellow-green.theme
-#include /usr/share/doc/task/rc/dark-gray-256.theme
-include /usr/share/doc/task/rc/dark-gray-blue-256.theme
+include /usr/share/doc/task/rc/dark-gray-256.theme
+#include /usr/share/doc/task/rc/dark-gray-blue-256.theme
 #include /usr/share/doc/task/rc/solarized-dark-256.theme
 #include /usr/share/doc/task/rc/solarized-light-256.theme
 #include /usr/share/doc/task/rc/no-color.theme
@@ -35,6 +35,8 @@ report._reviewed.description=Tasksh review report.  Adjust the filter to your ne
 report._reviewed.columns=uuid
 report._reviewed.sort=reviewed+,modified+
 report._reviewed.filter=( reviewed.none: or reviewed.before:now-1week ) and ( +PENDING or +WAITING )
-context.Buffer=project:work.buffer
-context.Seneca=project:work.seneca
-context=Buffer
+context.work=+work
+context.personal=+personal
+context.next=+next
+context.delegate=+delegate
+context=work

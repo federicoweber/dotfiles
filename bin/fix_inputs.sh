@@ -5,6 +5,7 @@ synclient VertScrollDelta=-111 \
   TapButton3=2 \
   PalmDetect=1 \
   HorizTwoFingerScroll=1\
+  HorizScrollDelta=-111 \
   PalmMinWidth=8\
   PalmMinZ=100
 xmodmap .Xmodmap
