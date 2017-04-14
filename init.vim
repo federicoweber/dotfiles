@@ -36,6 +36,9 @@
     Plug 'rbgrouleff/bclose.vim'
     " code completion
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    " Golang Support
+    Plug 'fatih/vim-go'
+    Plug 'zchee/deoplete-go', { 'do': 'make'}
 " }
 
 call plug#end()

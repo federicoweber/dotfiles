@@ -94,6 +94,8 @@ alias tmks='tmux kill-session -t '
 alias v=nvim
 alias vim=nvim
 alias vs='nvim -S'
+alias wfl='nmcli dev wifi list'
+alias wfc='nmcli dev wifi connect'
 
 # Taskwarrior
 alias ts=tasksh
@@ -139,9 +141,6 @@ alias s="cd ~/Projects/Seneca/seneca-env"
 alias sup="cd ~/Projects/Seneca/seneca-env && docker-compose up -d && docker ps && cd - "
 alias sstop="cd ~/Projects/Seneca/seneca-env && docker-compose stop && cd -"
 
-# fix VIM colors in tmus
-alias fixcolors="export TERM='screen-256color'"
-
 # My Theme
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{cyan} "
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
@@ -159,11 +158,12 @@ PROMPT='%{$bg[cyan]%}%F{black} %~ %F{cyan}%{$bg[black]%}▓▒░ %F{cyan} $(git
 %{$bg[default]%}%F{cyan} %{$reset_color%} '
 RPROMPT=''
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+# Local Path
+export GOPATH="$HOME/Golang"
+export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:./node_modules/.bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
-# Add local node_modules parth
-export PATH="$PATH:./node_modules/.bin"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source /usr/share/nvm/init-nvm.sh
