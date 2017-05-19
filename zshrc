@@ -66,6 +66,7 @@ source $ZSH/oh-my-zsh.sh
 
 export LANG=en_US.UTF-8
 export EDITOR='nvim'
+export NOTES_PATH=~/Dropbox/Documents/notes
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -85,25 +86,32 @@ eval $(keychain --eval --quiet id_rsa)
 alias backup="~/bin/backup.sh"
 alias dcl="docker-compose logs -f"
 alias dl="docker logs -f"
+alias f="fzf-tmux --multi --reverse -h 80%"
 alias gip="~/bin/ip.sh"
 alias lip="~/bin/locateip.sh"
+alias n="cd $NOTES_PATH"
+alias na="~/bin/notes"
+alias r=ranger
 alias sudo="sudo "
 alias tm=tmux
 alias tmk='tmux kill-server'
 alias tmks='tmux kill-session -t '
 alias v=nvim
+alias vi=nvim
 alias vim=nvim
 alias vs='nvim -S'
+alias vf='nvim $(f)' #open files in vim using fzf for search
 alias wfl='nmcli dev wifi list'
 alias wfc='nmcli dev wifi connect'
 
 # Taskwarrior
 alias ts=tasksh
-alias tcw='task context work && t'
-alias tcp='task context personal && t'
-alias tcn='task context next && t'
-alias tcd='task context delegate && t'
-alias tcx='task context none && t'
+alias tct='task context today && task'
+alias tcw='task context work && task'
+alias tcp='task context projects && task'
+alias tcn='task context next && task'
+alias tcd='task context delegate && task'
+alias tcx='task context none && task'
 
 # Docker
 alias d=docker

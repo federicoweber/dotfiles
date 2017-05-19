@@ -1,0 +1,22 @@
+#!/bin/bash
+
+DATE=`date +%Y%m%d`;
+type='';
+tags='';
+
+if [ -z $1 ]
+then
+  type='';
+else
+  type="-$1";
+fi
+
+tags=`sed -e "s/\s/-/g" <<< $2`
+if [ -z $tags ]
+then
+  tags='';
+else
+  tags="-$tags";
+fi
+
+$EDITOR "$NOTES_PATH/$DATE-NT$type$tags.md" <<< $3

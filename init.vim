@@ -36,9 +36,16 @@
     Plug 'rbgrouleff/bclose.vim'
     " code completion
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install tern', 'for': ['javascript', 'javascript.jsx'] }
+    Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+    Plug 'ervandew/supertab'
+
     " Golang Support
     Plug 'fatih/vim-go'
     Plug 'zchee/deoplete-go', { 'do': 'make'}
+
+    "Protobuf support
+    Plug 'uarun/vim-protobuf'
 " }
 
 call plug#end()
@@ -94,7 +101,6 @@ set hlsearch "highlight search
 "clear search highlight
 nnoremap <silent> <leader><space> :<C-u>nohlsearch<CR>
 
-
 " Linter settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -112,8 +118,10 @@ let g:syntastic_javascript_checkers = ['standard']
 let g:syntastic_php_checkers=['php', 'phpcs']
 let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
 
-" enable code completion
+"  code completion
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 " disable automatic formatting for php
 let g:phpfmt_autosave = 0
@@ -171,4 +179,5 @@ map <silent> <leader>sx :lcl<CR>
 map <Leader>y "+y
 
 " close buffer
-map <Leader>q :q<CR>
+map <Leader>qq :q<CR>
+map <Leader>w :w<CR>

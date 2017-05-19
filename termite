@@ -24,7 +24,7 @@
 
   [colors]
   foreground = #D8DEE9
-  background = rgba(46, 52, 64, 0.98)
+  background = rgba(46, 52, 64, 1)
   #original color = #2E3440
   foreground_bold = #D8DEE9
   cursor = #D8DEE9
