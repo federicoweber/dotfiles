@@ -106,8 +106,10 @@ alias wfc='nmcli dev wifi connect'
 
 # Taskwarrior
 alias ts=tasksh
+alias tc='task context'
+alias ta='task add'
 alias tct='task context today && task'
-alias tcw='task context work && task'
+alias tcw='task context week && task'
 alias tcp='task context projects && task'
 alias tcn='task context next && task'
 alias tcd='task context delegate && task'
