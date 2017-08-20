@@ -9,7 +9,7 @@
   clickable_url = true
   icon_name = terminal
   browser = chromium
-  font = Source Code Pro 18
+  font = Source Code Pro 20
   fullscreen = true
   mouse_autohide = true
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

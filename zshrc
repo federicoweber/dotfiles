@@ -121,22 +121,8 @@ alias dps="docker ps"
 alias dc=docker-compose
 
 # GIT
-# alias g=git
-# alias ga="git add"
-# alias gaa="git add -all"
-# alias gb="git branch"
-# alias gc="git commit"
-# alias gca="git commit --amend"
-# alias gcm="git commit -m"
-# alias gco="git checkout"
-# alias gcm="git checkout master"
-# alias gf="git fetch --all --prune"
-# alias gp="git push"
-# alias gl="git pull"
-# alias glol="git log --graph --pretty = format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-# alias glola="git log --graph --pretty = format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
-# alias grhh="git reset HEAD --hard"
-# alias gst="git status"
+# Lint all changed js and jsx in a branch
+alias glj="git diff --name-only master... | grep -v bundle | grep .jsx*$ | xargs eslint -c .eslintrc.json --stdin --quiet -f table"
 
 # Buffer
 alias b="cd ~/Projects/Buffer/buffer-dev"
@@ -145,6 +131,16 @@ alias bup="cd ~/Projects/Buffer/buffer-dev && ./dev up && cd -"
 alias bstop="cd ~/Projects/Buffer/buffer-dev && ./dev stop && cd -"
 alias bps="cd ~/Projects/Buffer/buffer-dev && ./dev ps && cd -"
 alias bbc="npm run compile && cp lib/chronos.js ~/Projects/Buffer/buffer-dev/buffer-web/node_modules/@bufferapp/chronos/lib/chronos.js" #Develop Chronos
+alias bba="npm test && gulp webpack --app" #run front-end tests and build app
+alias bbo="npm test && gulp webpack --app overviewTab" # run front-end tests and build Overview Tab
+alias bboc="npm test && gulp webpack --app overviewTab && gaa && gcmsg 'bundle overviewTab'" # run front-end tests,build Overview Tab, and commit it
+
+# Buffer quality build, this build the front-end app only if linter and tests are sucesful
+alias bqb="glj && bba"
+#
+# Buffer Build Oveview Secure
+alias bbos="glj && bba overviewTab"
+alias bbosc="glj && bba overviewTab && gaa && gcmsg 'bundle overviewTab'"
 
 # Seneca
 alias s="cd ~/Projects/Seneca/seneca-env"
@@ -171,6 +167,7 @@ RPROMPT=''
 # Local Path
 export GOPATH="$HOME/Golang"
 export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:/home/fwd/.gem/ruby/2.4.0/bin"
 export PATH="$PATH:./node_modules/.bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 

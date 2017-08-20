@@ -16,6 +16,7 @@
     Plug  'bling/vim-bufferline'
     " Linter
     Plug 'vim-syntastic/syntastic'
+    Plug 'neomake/neomake'
     " finder
     Plug 'rking/ag.vim'
     " fzf finder
@@ -157,7 +158,7 @@ let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 let g:fzf_height = 100
 
 " Toggle Session recording with Obsession
-map <silent> <leader>o :Obsession<CR>
+map <silent> <leader>s :Obsession<CR>
 
 " This hack is needded to use C-h to navigate splits in nvim see https://github.com/christoomey/vim-tmux-navigator
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
@@ -181,3 +182,15 @@ map <Leader>y "+y
 " close buffer
 map <Leader>qq :q<CR>
 map <Leader>w :w<CR>
+
+" neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_php_enabled_makers = ['phpcs']
+autocmd! BufWritePost,BufEnter * Neomake
+
+nmap <Leader>o :lopen<CR>      " open location window
+nmap <Leader>c :lclose<CR>     " close location window
+nmap <Leader>, :ll<CR>         " go to current error/warning
+nmap <Leader>n :lnext<CR>      " next error/warning
+nmap <Leader>p :lprev<CR>      " previous error/warning

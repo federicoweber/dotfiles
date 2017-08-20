@@ -1,6 +1,7 @@
+*.log
+.tern-port
+.vscode
 Session.vim
 node_modules
 tags
-*.log
-.vscode
-.tern-port
+v8-compile-cache-0
