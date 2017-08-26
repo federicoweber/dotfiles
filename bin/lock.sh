@@ -9,7 +9,7 @@ convert /tmp/screen.png -scale 10% -scale 1000% \
 
 # add a quote
 convert /tmp/screen.png \
--font fontawesome -fill '#BF616A90' -undercolor '#2E344000' \
+-font fontawesome -fill '#4C566A90' -undercolor '#FFFFFF00' \
 -gravity Center -pointsize 400 -annotate +0+0 '' \
 /tmp/screen.png
 

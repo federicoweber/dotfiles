@@ -100,7 +100,7 @@ alias v=nvim
 alias vi=nvim
 alias vim=nvim
 alias vs='nvim -S'
-alias vf='nvim $(f)' #open files in vim using fzf for search
+alias vf='nvim $(f --preview "cat {}")' #open files in vim using fzf for search
 alias wfl='nmcli dev wifi list'
 alias wfc='nmcli dev wifi connect'
 
