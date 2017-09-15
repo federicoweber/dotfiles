@@ -1,6 +1,3 @@
-! ------------------------------------------------------------------------------
-! hyperbeast colorscheme https://github.com/alkaef/hyperbeast
-! ------------------------------------------------------------------------------
 rofi.color-enabled: true
 rofi.color-window: #E62E3440, #E62E3440, argb:E62E3440
 rofi.color-normal: #002E3440, #4C566A, #002E3440, #002E3440, #D8DEE9
