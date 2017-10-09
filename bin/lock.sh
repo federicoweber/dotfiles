@@ -9,8 +9,8 @@ convert /tmp/screen.png -scale 10% -scale 1000% \
 
 # add a quote
 convert /tmp/screen.png \
--font fontawesome -fill '#4C566A90' -undercolor '#FFFFFF00' \
--gravity Center -pointsize 400 -annotate +0+0 '' \
+-font fontawesome -fill '#c23127' -undercolor '#FFFFFF00' \
+-gravity Center -pointsize 100 -annotate +0+0 '  ' \
 /tmp/screen.png
 
 [[ -f $1 ]] && convert /tmp/screen.png $1 -gravity center -composite -matte /tmp/screen.png

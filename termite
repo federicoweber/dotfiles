@@ -9,41 +9,44 @@
   clickable_url = true
   icon_name = terminal
   browser = chromium
-  font = Source Code Pro 18
+  font = Source Code Pro 17
   fullscreen = true
   mouse_autohide = true
-  # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  # title      Nord Termite                                    +
-  # project    nord-termite                                    +
-  # version    0.2.0                                           +
-  # repository https://github.com/arcticicestudio/nord-termite +
-  # author     Arctic Ice Studio                               +
-  # email      development@arcticicestudio.com                 +
-  # copyright  Copyright (C) 2016                              +
-  # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  geometry = 1680x720
+
+  # Gotham color scheme
+  # https://github.com/whatyouhide/gotham-contrib/blob/master/termite/gotham
 
   [colors]
-  foreground = #D8DEE9
-  background = rgba(46, 52, 64, 0.98)
-  #original color = #2E3440
-  foreground_bold = #D8DEE9
-  cursor = #D8DEE9
-  cursor_foreground = #2E3440
-  highlight = #4C566A
 
-  color0  = #3B4252
-  color1  = #BF616A
-  color2  = #A3BE8C
-  color3  = #EBCB8B
-  color4  = #81A1C1
-  color5  = #B48EAD
-  color6  = #88C0D0
-  color7  = #E5E9F0
-  color8  = #4C566A
-  color9  = #BF616A
-  color10 = #A3BE8C
-  color11 = #EBCB8B
-  color12 = #81A1C1
-  color13 = #B48EAD
-  color14 = #8FBCBB
-  color15 = #ECEFF4
+  foreground      = #98d1ce
+  foreground_bold = #98d1ce
+  cursor          = #98d1ce
+  background      = #0a0f14
+  background      = rgba(12, 16, 20, 1)
+  cursor_foreground = #0c1014
+  highlight = #2aa889
+
+  color0  = #0a0f14
+  color8  = #10151b
+
+  color1  = #c33027
+  color9  = #d26939
+
+  color2  = #26a98b
+  color10 = #081f2d
+
+  color3  = #edb54b
+  color11 = #245361
+
+  color4  = #195465
+  color12 = #093748
+
+  color5  = #4e5165
+  color13 = #888ba5
+
+  color6  = #33859d
+  color14 = #599caa
+
+  color7  = #98d1ce
+  color15 = #d3ebe9

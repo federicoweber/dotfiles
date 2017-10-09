@@ -20,7 +20,6 @@
     ~/.gitignore_global:
     ~/.tmux.conf:
     ~/.wegorc:
-    ~/.Xmodmap:
     ~/.xinitrc:
     ~/.zshrc:
     ~/bin: bin

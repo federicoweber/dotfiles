@@ -3,19 +3,19 @@
     " status line
     Plug 'itchyny/lightline.vim'
     " Cool color theme
-    Plug 'arcticicestudio/nord-vim'
+    Plug 'whatyouhide/vim-gotham'
     " Color picker & viewer
     Plug 'KabbAmine/vCoolor.vim'
     Plug 'etdev/vim-hexcolor'
     " Language Sintax
     Plug 'pangloss/vim-javascript'
+    Plug 'styled-components/vim-styled-components'
     " GIT
     Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
     " VIM Buffer
     Plug  'bling/vim-bufferline'
     " Linter
-    Plug 'vim-syntastic/syntastic'
     Plug 'neomake/neomake'
     " finder
     Plug 'rking/ag.vim'
@@ -53,23 +53,28 @@ call plug#end()
 
 " Here comes the look
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-colorscheme nord
+colorscheme gotham
 
 " line numbers
 set relativenumber "show relative line numbers
 set number "show current line number
 set ruler "show cursor position
-" Toggle relative number visualizatioj
-map <silent> <leader>r :set relativenumber!<CR>
 
 " lightline config
 let g:lightline = {
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'gotham',
       \ 'separator': { 'left': '▓▒░ ', 'right': ' ░▒▓' },
       \ 'subseparator': { 'left': '¦', 'right': '¦' },
       \ 'component': {
       \   'readonly': '%{&readonly?"":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head',
+      \ },
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ }
 
@@ -102,23 +107,6 @@ set hlsearch "highlight search
 "clear search highlight
 nnoremap <silent> <leader><space> :<C-u>nohlsearch<CR>
 
-" Linter settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-" disable automatic check
-let g:syntastic_mode_map = { 'mode': 'passive' }
-" JS
-let g:syntastic_javascript_checkers = ['standard']
-" PHP
-let g:syntastic_php_checkers=['php', 'phpcs']
-let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
-
 "  code completion
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
@@ -126,24 +114,6 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 
 " disable automatic formatting for php
 let g:phpfmt_autosave = 0
-
-" Key bindings
-" Buffer navigation
-nnoremap <silent> [b :bprevious<CR>
-nnoremap <silent> ]b :bnext<CR>
-nnoremap <silent> ]q :bdelete<CR>
-" tab navigation
-nnoremap <silent> [t :tabprev<CR>
-nnoremap <silent> ]t :tabnext<CR>
-nnoremap <silent> [T :tabfirst<CR>
-nnoremap <silent> ]T :tablast<CR>
-nnoremap <silent> tn :tabnew<CR>
-nnoremap <silent> tq :tabclose<CR>
-" quick list
-nnoremap <silent> [c :cprev<CR>
-nnoremap <silent> ]c :cnext<CR>
-nnoremap <silent> [C :cfirst<CR>
-nnoremap <silent> ]C :clast<CR>
 
 " Tools
 " Fuzzy file finder
@@ -165,6 +135,30 @@ nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 " Disable tmux navigator when zooming the Vim pane
 let g:tmux_navigator_disable_when_zoomed = 1
 
+" neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_php_enabled_makers = ['phpcs']
+autocmd! BufWritePost,BufEnter * Neomake
+
+" Key bindings
+" Buffer navigation
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> ]q :bdelete<CR>
+" tab navigation
+nnoremap <silent> [t :tabprev<CR>
+nnoremap <silent> ]t :tabnext<CR>
+nnoremap <silent> [T :tabfirst<CR>
+nnoremap <silent> ]T :tablast<CR>
+nnoremap <silent> tn :tabnew<CR>
+nnoremap <silent> tq :tabclose<CR>
+" quick list
+nnoremap <silent> [c :cprev<CR>
+nnoremap <silent> ]c :cnext<CR>
+nnoremap <silent> [C :cfirst<CR>
+nnoremap <silent> ]C :clast<CR>
+
 "Git bindings
 map <silent> <leader>ga :Git add %<CR>
 map <silent> <leader>gc :Gcommit<CR>
@@ -177,20 +171,36 @@ map <silent> <leader>sc :SyntasticCheck<CR>
 map <silent> <leader>sx :lcl<CR>
 
 " Copy to system clipboard
-map <Leader>y "+y
+map <A-y> "+y
 
 " close buffer
 map <Leader>qq :q<CR>
 map <Leader>w :w<CR>
 
-" neomake
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_php_enabled_makers = ['phpcs']
-autocmd! BufWritePost,BufEnter * Neomake
+" move line up
+nnoremap <A-j> :m .+1<CR>==
+" move line down
+nnoremap <A-k> :m .-2<CR>==
+" move line to the marked line and indent it
+nnoremap <A-m> :m 'm<CR>==
+" move line to the marked line and jump back to the line after it
+nnoremap <A-M> jm`k :m 'm<CR> ``
+" move visual selection to the marked line
+vnoremap <A-m> :m 'm<CR>gv=
 
+" replace word with last yanked one
+map <Leader>r ciw<C-r>0<ESC>
+
+" append date at the end of the line
+nnoremap <A-D> A<C-r>=strftime("%x")<CR><ESC>
+nnoremap <A-d> A<C-r>=strftime("%B %d %Y")<CR><ESC>
+
+" find lines in current buffer
+nmap <A-l> :BLines<CR>
+
+" linter navigation
 nmap <Leader>o :lopen<CR>      " open location window
 nmap <Leader>c :lclose<CR>     " close location window
 nmap <Leader>, :ll<CR>         " go to current error/warning
-nmap <Leader>n :lnext<CR>      " next error/warning
-nmap <Leader>p :lprev<CR>      " previous error/warning
+nmap <Leader>j :lnext<CR>      " next error/warning
+nmap <Leader>k :lprev<CR>      " previous error/warning

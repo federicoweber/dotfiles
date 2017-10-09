@@ -35,13 +35,17 @@ report._reviewed.description=Tasksh review report.  Adjust the filter to your ne
 report._reviewed.columns=uuid
 report._reviewed.sort=reviewed+,modified+
 report._reviewed.filter=( reviewed.none: or reviewed.before:now-1week ) and ( +PENDING or +WAITING )
-context.work=+work
-context.week=+week or +WEEK or +next or +OVERDUE
-context.projects=+projects
-context.next=+next
-context.delegate=+delegate
-context.workN=+work +next
+
+fontunderline = off
+weekstart = monday
+uda.priority.default = M
+
+# Context
+context.week=+WEEK or +OVERDUE
 context.today=+OVERDUE or +TODAY or +next
-context.Life=-projects -work
-context.hobbyes=+photography
-context=week
+
+context.delegate=+delegate
+context.life=-work
+context.work=+work
+
+# Set by Taskwarrior

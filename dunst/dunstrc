@@ -5,7 +5,7 @@
     follow = mouse
     font = "Fira Sans 16"
     format = "<b>%a</b>\n<i>%s</i>\n%b"
-    geometry = "600x20-20+55"
+    geometry = "600x20-20-20"
     horizontal_padding = 10
     idle_threshold = 120
     ignore_newline = no
@@ -13,7 +13,7 @@
     line_height = 0
     monitor = 0
     padding = 20
-    separator_color = "#2E3440"
+    separator_color = "#0c1014"
     separator_height = 2
     show_age_threshold = 60
     sort = yes
@@ -24,7 +24,7 @@
 
 [frame]
     width = 1
-    color = "#81A1C1"
+    color = "#2aa889"
 
 [shortcuts]
     close = ctrl+space
@@ -33,16 +33,16 @@
     context = ctrl+shift+period
 
 [urgency_low]
-    background = "#2E3440"
-    foreground = "#88C0D0"
+    background = "#0c1014"
+    foreground = "#33859E"
     timeout = 5
 
 [urgency_normal]
-    background = "#2E3440"
-    foreground = "#D8DEE9"
+    background = "#0c1014"
+    foreground = "#2aa889"
     timeout = 20
 
 [urgency_critical]
-    background = "#EBCB8B"
-    foreground = "#2E3440"
+    background = "#0c1014"
+    foreground = "#c23127"
     timeout = 0

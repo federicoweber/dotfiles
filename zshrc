@@ -86,7 +86,7 @@ eval $(keychain --eval --quiet id_rsa)
 alias backup="~/bin/backup.sh"
 alias dcl="docker-compose logs -f"
 alias dl="docker logs -f"
-alias f="fzf-tmux --multi --reverse -h 80%"
+alias f='fzf-tmux --multi --reverse -h 80% '
 alias gip="~/bin/ip.sh"
 alias lip="~/bin/locateip.sh"
 alias n="cd $NOTES_PATH"
@@ -100,7 +100,7 @@ alias v=nvim
 alias vi=nvim
 alias vim=nvim
 alias vs='nvim -S'
-alias vf='nvim $(f --preview "cat {}")' #open files in vim using fzf for search
+alias vf='vim `fzf --preview="head -100 {}" --preview-window=right:70%:wrap`' #open files in vim using fzf for search
 alias wfl='nmcli dev wifi list'
 alias wfc='nmcli dev wifi connect'
 
@@ -110,9 +110,6 @@ alias tc='task context'
 alias ta='task add'
 alias tct='task context today && task'
 alias tcw='task context week && task'
-alias tcp='task context projects && task'
-alias tcn='task context next && task'
-alias tcd='task context delegate && task'
 alias tcx='task context none && task'
 
 # Docker
@@ -128,6 +125,7 @@ alias glj="git diff --name-only master... | grep -v bundle | grep .jsx*$ | xargs
 alias b="cd ~/Projects/Buffer/buffer-dev"
 alias bw="cd ~/Projects/Buffer/buffer-dev/buffer-web"
 alias bup="cd ~/Projects/Buffer/buffer-dev && ./dev up && cd -"
+alias aup="cd ~/Projects/Buffer/buffer-dev && ./dev up analyze account && cd -"
 alias bstop="cd ~/Projects/Buffer/buffer-dev && ./dev stop && cd -"
 alias bps="cd ~/Projects/Buffer/buffer-dev && ./dev ps && cd -"
 alias bbc="npm run compile && cp lib/chronos.js ~/Projects/Buffer/buffer-dev/buffer-web/node_modules/@bufferapp/chronos/lib/chronos.js" #Develop Chronos
@@ -148,20 +146,20 @@ alias sup="cd ~/Projects/Seneca/seneca-env && docker-compose up -d && docker ps 
 alias sstop="cd ~/Projects/Seneca/seneca-env && docker-compose stop && cd -"
 
 # My Theme
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{cyan} "
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{blue} "
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_SEPARATOR=""
 ZSH_THEME_GIT_PROMPT_BRANCH=""
-ZSH_THEME_GIT_PROMPT_STAGED="%F{cyan}%{$bg[black]%} %{ %G%}"
-ZSH_THEME_GIT_PROMPT_CONFLICTS="%F{cyan}%{$bg[black]%} %{ %G%}"
-ZSH_THEME_GIT_PROMPT_CHANGED="%F{cyan}%{$bg[black]%} %{✚ %G%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%F{cyan}%{$bg[black]%} %{↓%G%}"
-ZSH_THEME_GIT_PROMPT_AHEAD="%F{cyan}%{$bg[black]%} %{↑%G%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{cyan}%{$bg[black]%} %{ %G%}"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_STAGED="%F{green}%{$bg[black]%} %{ %G%}"
+ZSH_THEME_GIT_PROMPT_CONFLICTS="%F{red}%{$bg[black]%} %{ %G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED="%F{yellow}%{$bg[black]%} %{✚ %G%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%F{white}%{$bg[black]%} %{↓%G%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%F{white}%{$bg[black]%} %{↑%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{white}%{$bg[black]%} %{ %G%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%F{blue}%{$bg[black]%} "
 
-PROMPT='%{$bg[cyan]%}%F{black} %~ %F{cyan}%{$bg[black]%}▓▒░ %F{cyan} $(git_super_status)%{$bg[default]%}%F{black}▓▒░
-%{$bg[default]%}%F{cyan} %{$reset_color%} '
+PROMPT='%{$bg[green]%}%F{black} %~ %F{green}%{$bg[black]%}▓▒░ $(git_super_status)%{$bg[default]%}%F{black}▓▒░
+%{$bg[default]%}%F{green} %{$reset_color%} '
 RPROMPT=''
 
 # Local Path
@@ -169,6 +167,8 @@ export GOPATH="$HOME/Golang"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:/home/fwd/.gem/ruby/2.4.0/bin"
 export PATH="$PATH:./node_modules/.bin"
+export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:~/.config/composer/vendor/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 
