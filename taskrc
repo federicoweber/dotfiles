@@ -13,21 +13,61 @@
 # Files
 data.location=~/.task
 
-# Color theme (uncomment one to use)
-#include /usr/share/doc/task/rc/light-16.theme
-#include /usr/share/doc/task/rc/light-256.theme
-#include /usr/share/doc/task/rc/dark-16.theme
-#include /usr/share/doc/task/rc/dark-256.theme
-#include /usr/share/doc/task/rc/dark-red-256.theme
-#include /usr/share/doc/task/rc/dark-green-256.theme
-#include /usr/share/doc/task/rc/dark-blue-256.theme
-#include /usr/share/doc/task/rc/dark-violets-256.theme
-#include /usr/share/doc/task/rc/dark-yellow-green.theme
-#include /usr/share/doc/task/rc/dark-gray-256.theme
-include /usr/share/doc/task/rc/dark-gray-blue-256.theme
-#include /usr/share/doc/task/rc/solarized-dark-256.theme
-#include /usr/share/doc/task/rc/solarized-light-256.theme
-#include /usr/share/doc/task/rc/no-color.theme
+# Colors
+color=on
+
+color.active=blue on white
+color.alternate=on color8
+color.blocked=underline red
+color.blocking=underline yellow
+
+color.tag.none=blue
+color.tag.next=on green
+color.tagged=cyan
+color.project.none=
+color.recurring=underline
+color.scheduled=underline
+
+color.uda.priority.H=yellow
+color.uda.priority.L=
+color.uda.priority.M=
+color.pri.none=
+color.debug=white
+
+color.due=green
+color.due.today=black on green
+color.overdue=red
+
+color.footnote=blue
+color.header=blue
+color.warning=yellow
+
+color.burndown.done=black on green
+color.burndown.pending=black on blue
+color.burndown.started=black on white
+
+color.calendar.due=green on black
+color.calendar.due.today=black on green
+color.calendar.holiday=cyan
+color.calendar.day=cyan
+color.calendar.overdue=black on red
+color.calendar.today=black on yellow
+color.calendar.weekend=on color11
+color.calendar.weeknumber=color11
+
+color.history.add=black on cyan
+color.history.delete=black on yellow
+color.history.done=black on green
+
+color.summary.background=on black
+color.summary.bar=color0 on green
+
+color.sync.added=green
+color.sync.changed=green
+color.sync.rejected=red
+
+color.undo.after=
+color.undo.before=
 
 uda.reviewed.type=date
 uda.reviewed.label=Reviewed
@@ -40,12 +80,16 @@ fontunderline = off
 weekstart = monday
 uda.priority.default = M
 
+# Urgency
+urgency.user.tag.work.coefficient=5
+
 # Context
-context.week=+WEEK or +OVERDUE
-context.today=+OVERDUE or +TODAY or +next
+context.week=+WEEK or +OVERDUE or +ACTIVE
+context.today=+OVERDUE or +TODAY or +next or +ACTIVE
 
 context.delegate=+delegate
 context.life=-work
 context.work=+work
 
 # Set by Taskwarrior
+context=week

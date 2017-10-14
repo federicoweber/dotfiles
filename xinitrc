@@ -24,7 +24,10 @@ if [ -f "$usermodmap" ]; then
 fi
 
 # fix DPI
-xrandr --dpi 144
+xrandr --dpi 144 
+
+# run optimus
+optirun true
 
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  for f in /etc/X11/xinit/xinitrc.d/?* ; do

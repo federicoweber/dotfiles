@@ -56,7 +56,7 @@ DEFAULT_USER="fwd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast git-prompt taskwarrior tmux)
+plugins=(git gitfast git-prompt taskwarrior tmux kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -116,6 +116,9 @@ alias tcx='task context none && task'
 alias d=docker
 alias dps="docker ps"
 alias dc=docker-compose
+
+# Kubectl
+alias k=kubectl
 
 # GIT
 # Lint all changed js and jsx in a branch
