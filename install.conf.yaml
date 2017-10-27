@@ -6,23 +6,24 @@
 - clean: ['~', '~/.config']
 
 - link:
-    ~/.gtkrc-2.0:
     ~/.config/compton.conf: compton.conf
+    ~/.config/dunst: dunst
     ~/.config/gtk-2.0: gtk-2.0
     ~/.config/gtk-3.0: gtk-3.0
     ~/.config/i3/config: i3/i3.config
     ~/.config/i3status/config: i3/i3status.conf
     ~/.config/nvim/init.vim: init.vim
     ~/.config/ranger/rc.conf: ranger/rc.conf
-    ~/.taskrc:
     ~/.config/termite/config: termite
-    ~/.config/dunst: dunst
+    ~/.config/fontconfig/fonts.conf: fonts.conf
     ~/.gitignore_global:
+    ~/.gtkrc-2.0:
+    ~/.taskrc:
     ~/.tmux.conf:
     ~/.wegorc:
     ~/.xinitrc:
-    ~/.zshrc:
     ~/.zshenv:
+    ~/.zshrc:
     ~/bin: bin
 
 - shell:

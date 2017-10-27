@@ -71,12 +71,32 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
+      \   'filename': 'LightLineFilename'
       \ },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ]
       \ },
       \ }
+
+" abbreviated path from https://github.com/itchyny/lightline.vim/issues/87#issuecomment-324988609
+function! LightLineFilename()
+  let name = ""
+  let subs = split(expand('%'), "/") 
+  let i = 1
+  for s in subs
+    let parent = name
+    if  i == len(subs)
+      let name = parent . '/' . s
+    elseif i == 1
+      let name = s
+    else
+      let name = parent . '/' . strpart(s, 0, 2)
+    endif
+    let i += 1
+  endfor
+  return name
+endfunction
 
 
 " Get rid of disturbing sounds
@@ -118,7 +138,7 @@ let g:phpfmt_autosave = 0
 " Tools
 " Fuzzy file finder
 function! s:find_git_root()
-	return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 
 command! ProjectFiles execute 'Files' s:find_git_root()

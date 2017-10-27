@@ -16,17 +16,17 @@ data.location=~/.task
 # Colors
 color=on
 
-color.active=blue on white
+color.active=black on white
 color.alternate=on color8
-color.blocked=underline red
-color.blocking=underline yellow
+color.blocked=underline
+color.blocking=yellow
 
 color.tag.none=blue
 color.tag.next=on green
 color.tagged=cyan
 color.project.none=
-color.recurring=underline
-color.scheduled=underline
+color.recurring=
+color.scheduled=
 
 color.uda.priority.H=yellow
 color.uda.priority.L=
@@ -35,7 +35,7 @@ color.pri.none=
 color.debug=white
 
 color.due=green
-color.due.today=black on green
+color.due.today=black on yellow
 color.overdue=red
 
 color.footnote=blue
@@ -47,11 +47,11 @@ color.burndown.pending=black on blue
 color.burndown.started=black on white
 
 color.calendar.due=green on black
-color.calendar.due.today=black on green
+color.calendar.due.today=black on yellow
 color.calendar.holiday=cyan
 color.calendar.day=cyan
 color.calendar.overdue=black on red
-color.calendar.today=black on yellow
+color.calendar.today=black on green
 color.calendar.weekend=on color11
 color.calendar.weeknumber=color11
 

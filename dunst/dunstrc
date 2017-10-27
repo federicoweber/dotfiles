@@ -3,7 +3,7 @@
     allow_markup = yes
     bounce_freq = 0
     follow = mouse
-    font = "Fira Sans 16"
+    font = "Fira Sans 10"
     format = "<b>%a</b>\n<i>%s</i>\n%b"
     geometry = "600x20-20-20"
     horizontal_padding = 10
