@@ -8,14 +8,15 @@
 - link:
     ~/.config/compton.conf: compton.conf
     ~/.config/dunst: dunst
+    ~/.config/fontconfig/fonts.conf: fonts.conf
     ~/.config/gtk-2.0: gtk-2.0
     ~/.config/gtk-3.0: gtk-3.0
     ~/.config/i3/config: i3/i3.config
     ~/.config/i3status/config: i3/i3status.conf
+    ~/.config/khal/config: khal
     ~/.config/nvim/init.vim: init.vim
     ~/.config/ranger/rc.conf: ranger/rc.conf
     ~/.config/termite/config: termite
-    ~/.config/fontconfig/fonts.conf: fonts.conf
     ~/.gitignore_global:
     ~/.gtkrc-2.0:
     ~/.taskrc:
