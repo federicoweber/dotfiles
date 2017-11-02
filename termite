@@ -22,12 +22,12 @@
   foreground      = #98d1ce
   foreground_bold = #98d1ce
   cursor          = #98d1ce
-  background      = #0a0f14
+  background      = #0c1014
   background      = rgba(12, 16, 20, 1)
   cursor_foreground = #0c1014
   highlight = #2aa889
 
-  color0  = #0a0f14
+  color0  = #0c1014
   color8  = #10151b
 
   color1  = #c33027

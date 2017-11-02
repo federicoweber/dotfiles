@@ -103,6 +103,7 @@ alias vs='nvim -S'
 alias vf='vim `fzf --preview="head -100 {}" --preview-window=right:70%:wrap`' #open files in vim using fzf for search
 alias wfl='nmcli dev wifi list'
 alias wfc='nmcli dev wifi connect'
+alias wfu='nmcli con up'
 
 # Taskwarrior
 alias ts=tasksh
