@@ -40,13 +40,13 @@
     Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install tern', 'for': ['javascript', 'javascript.jsx'] }
     Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
     Plug 'ervandew/supertab'
-
     " Golang Support
     Plug 'fatih/vim-go'
     Plug 'zchee/deoplete-go', { 'do': 'make'}
-
     "Protobuf support
     Plug 'uarun/vim-protobuf'
+    "Submode
+    Plug 'kana/vim-submode'
 " }
 
 call plug#end()
@@ -55,10 +55,23 @@ call plug#end()
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 colorscheme gotham
 
+" Sudmode settings
+" disable submode timeouts:
+let g:submode_timeout = 0
+" don't consume submode-leaving key
+let g:submode_keep_leaving_key = 1
+
 " line numbers
 set relativenumber "show relative line numbers
 set number "show current line number
 set ruler "show cursor position
+
+" automatic switch line number mode
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+:augroup END
 
 " lightline config
 let g:lightline = {
@@ -105,12 +118,16 @@ endfunction
 " Get rid of disturbing sounds
 set noerrorbells
 
-" use mouse to resize splits
-set mouse=n
-
 " Better splitting
 set splitbelow
 set splitright
+" Better splitting resizing
+call submode#enter_with('resize', 'n', '', '<leader>r', '<C-w>-')
+call submode#map('resize', 'n', '', 'j', '16<C-w>-')
+call submode#map('resize', 'n', '', 'k', '16<C-w>+')
+call submode#map('resize', 'n', '', 'h', '16<C-w><')
+call submode#map('resize', 'n', '', 'l', '16<C-w>>')
+call submode#map('resize', 'n', '', '=', '<C-=>=')
 
 " Show space and tabs
 set list
@@ -128,7 +145,7 @@ set hidden
 set incsearch "Show search preview
 set hlsearch "highlight search
 "clear search highlight
-nnoremap <silent> <leader><space> :<C-u>nohlsearch<CR>
+nnoremap <silent> <C-space> :<C-u>nohlsearch<CR>
 
 "  code completion
 let g:deoplete#enable_at_startup = 1
@@ -184,6 +201,7 @@ nnoremap <silent> ]C :clast<CR>
 
 "Git bindings
 map <silent> <leader>ga :Git add %<CR>
+map <silent> <leader>gb :Gblame<CR>
 map <silent> <leader>gc :Gcommit<CR>
 map <silent> <leader>gl :Glog -- %<CR>
 map <silent> <leader>gs :Gstatus<CR>
@@ -193,12 +211,13 @@ map <silent> <leader>st :SyntasticToggleMode<CR>
 map <silent> <leader>sc :SyntasticCheck<CR>
 map <silent> <leader>sx :lcl<CR>
 
-" Copy to system clipboard
-map <A-y> "+y
+" Toggle relative numbers
+map <silent> <A-R> :set relativenumber!<CR>
 
-" close buffer
-map <Leader>qq :q<CR>
-map <Leader>w :w<CR>
+" close and save buffer
+nnoremap <C-q> :q<CR>
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <esc>:w<CR>
 
 " move line up
 nnoremap <A-j> :m .+1<CR>==
@@ -212,7 +231,13 @@ nnoremap <A-M> jm`k :m 'm<CR> ``
 vnoremap <A-m> :m 'm<CR>gv=
 
 " replace word with last yanked one
-map <Leader>r ciw<C-r>0<ESC>
+map <leader>ry ciw<C-r>0<ESC>
+
+" pasT yanked text
+inoremap <C-v> <C-r>0
+
+" Copy to system clipboard
+map <A-y> "+y
 
 " append date at the end of the line
 nnoremap <A-D> A<C-r>=strftime("%x")<CR><ESC>
@@ -222,8 +247,8 @@ nnoremap <A-d> A<C-r>=strftime("%B %d %Y")<CR><ESC>
 nmap <A-l> :BLines<CR>
 
 " linter navigation
-nmap <Leader>o :lopen<CR>      " open location window
-nmap <Leader>c :lclose<CR>     " close location window
-nmap <Leader>, :ll<CR>         " go to current error/warning
-nmap <Leader>j :lnext<CR>      " next error/warning
-nmap <Leader>k :lprev<CR>      " previous error/warning
+nmap <leader>o :lopen<CR>      " open location window
+nmap <leader>c :lclose<CR>     " close location window
+nmap <leader>, :ll<CR>         " go to current error/warning
+nmap <leader>n :lnext<CR>      " next error/warning
+nmap <leader>p :lprev<CR>      " previous error/warning

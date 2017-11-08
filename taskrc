@@ -19,10 +19,10 @@ color=on
 color.active=black on white
 color.alternate=on color8
 color.blocked=underline
-color.blocking=yellow
+color.blocking=black on yellow
 
 color.tag.none=blue
-color.tag.next=on green
+color.tag.next=black on green
 color.tagged=cyan
 color.project.none=
 color.recurring=
@@ -34,8 +34,8 @@ color.uda.priority.M=
 color.pri.none=
 color.debug=white
 
-color.due=green
-color.due.today=black on yellow
+color.due=cyan
+color.due.today=green
 color.overdue=red
 
 color.footnote=blue
@@ -84,12 +84,15 @@ uda.priority.default = M
 urgency.user.tag.work.coefficient=5
 
 # Context
-context.week=+WEEK or +OVERDUE or +ACTIVE
+context.week=+WEEK or +OVERDUE or +next or +ACTIVE
 context.today=+OVERDUE or +TODAY or +next or +ACTIVE
 
 context.delegate=+delegate
 context.life=-work
 context.work=+work
 
+context.today_work=+OVERDUE and +work or +TODAY and +work or +next and +work or +ACTIVE +work
+context.today_life=+OVERDUE and -work or +TODAY and -work or +next and -work or +ACTIVE -work
+
 # Set by Taskwarrior
-context=week
+context=today

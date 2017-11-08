@@ -106,12 +106,15 @@ alias wfc='nmcli dev wifi connect'
 alias wfu='nmcli con up'
 
 # Taskwarrior
+alias t='clear && task'
 alias ts=tasksh
-alias tc='task context'
-alias ta='task add'
-alias tct='task context today && task'
-alias tcw='task context week && task'
-alias tcx='task context none && task'
+alias tc='t context'
+alias ta='t add'
+alias tct='clear && task context today && t'
+alias tctw='clear && task context today_work && t'
+alias tctl='clear && task context today_life && t'
+alias tcw='clear && task context week && t'
+alias tcx='clear && task context none && t'
 
 # Docker
 alias d=docker
