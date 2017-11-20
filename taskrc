@@ -19,11 +19,11 @@ color=on
 color.active=black on white
 color.alternate=on color8
 color.blocked=underline
-color.blocking=black on yellow
+color.blocking=underline yellow
 
 color.tag.none=blue
 color.tag.next=black on green
-color.tagged=cyan
+color.tagged=blue
 color.project.none=
 color.recurring=
 color.scheduled=
@@ -31,7 +31,6 @@ color.scheduled=
 color.uda.priority.H=yellow
 color.uda.priority.L=
 color.uda.priority.M=
-color.pri.none=
 color.debug=white
 
 color.due=cyan
@@ -40,7 +39,7 @@ color.overdue=red
 
 color.footnote=blue
 color.header=blue
-color.warning=yellow
+color.warning=black on yellow
 
 color.burndown.done=black on green
 color.burndown.pending=black on blue
@@ -55,8 +54,8 @@ color.calendar.today=black on green
 color.calendar.weekend=on color11
 color.calendar.weeknumber=color11
 
-color.history.add=black on cyan
-color.history.delete=black on yellow
+color.history.add=black on white
+color.history.delete=black on blue
 color.history.done=black on green
 
 color.summary.background=on black
@@ -82,6 +81,21 @@ uda.priority.default = M
 
 # Urgency
 urgency.user.tag.work.coefficient=5
+urgency.user.tag.finance.coefficient=2.5
+
+# Time estimation
+uda.estimate.type=duration
+uda.estimate.label=Estimated Duration
+uda.estimate.default=30min
+
+# Time duration
+uda.totalactivetime.type=duration
+uda.totalactivetime.label=Effective Duration
+uda.totalactivetime.values=''
+
+# Custom next report
+report.next.columns=id,priority,recur.indicator,scheduled.countdown,due.relative,until.remaining,estimate,totalactivetime,tags,project,description,depends,urgency
+report.next.labels=ID,P,R,S,Due,Until,Estimate,Duration,Tags,Project,Description,Deps,Urg
 
 # Context
 context.week=+WEEK or +OVERDUE or +next or +ACTIVE
@@ -91,8 +105,12 @@ context.delegate=+delegate
 context.life=-work
 context.work=+work
 
-context.today_work=+OVERDUE and +work or +TODAY and +work or +next and +work or +ACTIVE +work
-context.today_life=+OVERDUE and -work or +TODAY and -work or +next and -work or +ACTIVE -work
+context.today_work=+OVERDUE and +work or +TODAY and +work or +next and +work or +ACTIVE
+context.today_life=+OVERDUE and -work or +TODAY and -work or +next and -work or +ACTIVE
+
+context.week_work=+OVERDUE and +work or +WEEK and +work or +next and +work or +ACTIVE
+context.week_life=+OVERDUE and -work or +WEEK and -work or +next and -work or +ACTIVE
 
 # Set by Taskwarrior
-context=today
+context.Analyze=project:Analyze
+context=week

@@ -75,13 +75,13 @@ export NOTES_PATH=~/Dropbox/Documents/notes
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 eval $(keychain --eval --quiet id_rsa)
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-
-
 # Here comes some aliases
+# VPN
+alias nordup="sudo openvpn --config ~/vpn-configs/us1215.nordvpn.com.udp1194.ovpn \
+  --auth-user-pass ~/vpn-configs/credentials.conf \
+  --daemon --writepid ~/vpn-configs/nordvpn.pid"
+alias norddown="sudo kill $(cat ~/vpn-configs/nordvpn.pid)"
+
 # enable aliases in sudo mode http://askubuntu.com/questions/22037/aliases-not-available-when-using-sudo
 alias backup="~/bin/backup.sh"
 alias dcl="docker-compose logs -f"
@@ -107,14 +107,19 @@ alias wfu='nmcli con up'
 
 # Taskwarrior
 alias t='clear && task'
-alias ts=tasksh
+alias ts='t +ACTIVE stop && task'
 alias tc='t context'
 alias ta='t add'
 alias tct='clear && task context today && t'
 alias tctw='clear && task context today_work && t'
 alias tctl='clear && task context today_life && t'
 alias tcw='clear && task context week && t'
+alias tcww='clear && task context week_work && t'
+alias tcwl='clear && task context week_life && t'
 alias tcx='clear && task context none && t'
+
+# Timewarrior
+alias tw='timew'
 
 # Docker
 alias d=docker
@@ -177,7 +182,6 @@ export PATH="$PATH:./node_modules/.bin"
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:~/.config/composer/vendor/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source /usr/share/nvm/init-nvm.sh

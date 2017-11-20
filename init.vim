@@ -123,10 +123,10 @@ set splitbelow
 set splitright
 " Better splitting resizing
 call submode#enter_with('resize', 'n', '', '<leader>r', '<C-w>-')
-call submode#map('resize', 'n', '', 'j', '16<C-w>-')
-call submode#map('resize', 'n', '', 'k', '16<C-w>+')
-call submode#map('resize', 'n', '', 'h', '16<C-w><')
-call submode#map('resize', 'n', '', 'l', '16<C-w>>')
+call submode#map('resize', 'n', '', 'j', '12<C-w>-')
+call submode#map('resize', 'n', '', 'k', '12<C-w>+')
+call submode#map('resize', 'n', '', 'h', '12<C-w><')
+call submode#map('resize', 'n', '', 'l', '12<C-w>>')
 call submode#map('resize', 'n', '', '=', '<C-=>=')
 
 " Show space and tabs
@@ -211,8 +211,19 @@ map <silent> <leader>st :SyntasticToggleMode<CR>
 map <silent> <leader>sc :SyntasticCheck<CR>
 map <silent> <leader>sx :lcl<CR>
 
-" Toggle relative numbers
-map <silent> <A-R> :set relativenumber!<CR>
+" Log variable under cursor
+map <silent> <leader>pl y2wovar_dump(<C-r>0);<esc>
+map <silent> <leader>jl ywoconsole.log(<C-r>0);<esc>
+
+" replace word under cursor in line
+nnoremap  <A-r> yiw <bar> :s/<C-r>0//g<left><left>
+" replace word under cursor in buffer
+nnoremap  <A-R> yiw <bar> :%s/<C-r>0//g<left><left>
+" replace matching word in visual selection
+vnoremap  <A-r> :s///g<left><left>
+
+" find word in files
+nnoremap <silent> <leader>ff yiw :Ag <C-r>0<CR>
 
 " close and save buffer
 nnoremap <C-q> :q<CR>
@@ -233,7 +244,7 @@ vnoremap <A-m> :m 'm<CR>gv=
 " replace word with last yanked one
 map <leader>ry ciw<C-r>0<ESC>
 
-" pasT yanked text
+" past yanked text
 inoremap <C-v> <C-r>0
 
 " Copy to system clipboard
@@ -246,9 +257,14 @@ nnoremap <A-d> A<C-r>=strftime("%B %d %Y")<CR><ESC>
 " find lines in current buffer
 nmap <A-l> :BLines<CR>
 
+" execute q macro
+vnoremap <leader>q :norm! @q<CR>
+nnoremap <leader>q @q
+
+
 " linter navigation
 nmap <leader>o :lopen<CR>      " open location window
-nmap <leader>c :lclose<CR>     " close location window
+nmap <leader>x :lclose<CR>     " close location window
 nmap <leader>, :ll<CR>         " go to current error/warning
 nmap <leader>n :lnext<CR>      " next error/warning
 nmap <leader>p :lprev<CR>      " previous error/warning
