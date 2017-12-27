@@ -12,7 +12,7 @@
   font = Source Code Pro 10
   fullscreen = true
   mouse_autohide = true
-  geometry = 1680x720
+  geometry = 1720x720
 
   # Gotham color scheme
   # https://github.com/whatyouhide/gotham-contrib/blob/master/termite/gotham

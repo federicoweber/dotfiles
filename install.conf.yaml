@@ -8,6 +8,7 @@
 - link:
     ~/.config/compton.conf: compton.conf
     ~/.config/dunst: dunst
+    ~/.config/chromium-flags.conf: chromium-flags.conf
     ~/.config/fontconfig/fonts.conf: fonts.conf
     ~/.config/gtk-2.0: gtk-2.0
     ~/.config/gtk-3.0: gtk-3.0

@@ -132,6 +132,8 @@ alias k=kubectl
 # GIT
 # Lint all changed js and jsx in a branch
 alias glj="git diff --name-only master... | grep -v bundle | grep .jsx*$ | xargs eslint -c .eslintrc.json --stdin --quiet -f table"
+# amend and push last commit
+alias !gc="git commit --amend --no-edit && gp -f"
 
 # Buffer
 alias b="cd ~/Projects/Buffer/buffer-dev"

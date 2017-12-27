@@ -35,12 +35,12 @@
 [urgency_low]
     background = "#0c1014"
     foreground = "#33859E"
-    timeout = 5
+    timeout = 10
 
 [urgency_normal]
     background = "#0c1014"
     foreground = "#2aa889"
-    timeout = 20
+    timeout = 30
 
 [urgency_critical]
     background = "#0c1014"
