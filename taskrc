@@ -86,7 +86,7 @@ urgency.user.tag.finance.coefficient=2.5
 # Time estimation
 uda.estimate.type=duration
 uda.estimate.label=Estimated Duration
-uda.estimate.default=30min
+uda.estimate.default=1hour
 
 # Time duration
 uda.totalactivetime.type=duration
