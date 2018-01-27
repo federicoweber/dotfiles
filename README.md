@@ -18,6 +18,6 @@
  ```
 
  It uses [dotbot] (https://github.com/anishathalye/dotbot) for installation.
- Just run `./install_packages` and `./install`.
+ Just run `./install`.
  
- ![My current setup](./images/curret_setup.png)
+ ![My current setup](./images/current_setup.png)

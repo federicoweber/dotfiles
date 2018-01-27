@@ -13,7 +13,7 @@ if xrandr | grep --regex="^DP1 connected"; then
   sed -i 's/font = Source Code Pro 16/font = Source Code Pro 10/g' ~/dotfiles/termite & \
   # update dunst settings
   sed -i 's/font = "Fira Sans 16"/font = "Fira Sans 10"/g' ~/dotfiles/dunst/dunstrc & \
-  killall dunst & notify-send 'Display settings updated'
+  killall dunst
 
 # Laptop monitor
 else
@@ -26,7 +26,7 @@ else
   sed -i 's/font = Source Code Pro 10/font = Source Code Pro 16/g' ~/dotfiles/termite & \
   # update dunst settings
   sed -i 's/font = "Fira Sans 10"/font = "Fira Sans 16"/g' ~/dotfiles/dunst/dunstrc & \
-  killall dunst & notify-send 'Display settings updated'
+  killall dunst
 fi
 
 # TODO

@@ -2,7 +2,7 @@
 
 # Original script https://www.reddit.com/r/unixporn/comments/3358vu/i3lock_unixpornworthy_lock_screen/
 # capture and manipulate the screen
-scrot /tmp/screen.png
+maim /tmp/screen.png
 convert /tmp/screen.png -scale 10% -scale 1000% \
 -brightness-contrast -0x0 \
 /tmp/screen.png

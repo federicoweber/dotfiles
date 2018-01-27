@@ -139,13 +139,18 @@ alias !gc="git commit --amend --no-edit && gp -f"
 alias b="cd ~/Projects/Buffer/buffer-dev"
 alias bw="cd ~/Projects/Buffer/buffer-dev/buffer-web"
 alias bup="cd ~/Projects/Buffer/buffer-dev && ./dev up && cd -"
-alias aup="cd ~/Projects/Buffer/buffer-dev && ./dev up analyze account && cd -"
+alias aup="cd ~/Projects/Buffer/buffer-dev && ./dev up session-service account analyze && cd -"
 alias bstop="cd ~/Projects/Buffer/buffer-dev && ./dev stop && cd -"
 alias bps="cd ~/Projects/Buffer/buffer-dev && ./dev ps && cd -"
 alias bbc="npm run compile && cp lib/chronos.js ~/Projects/Buffer/buffer-dev/buffer-web/node_modules/@bufferapp/chronos/lib/chronos.js" #Develop Chronos
 alias bba="npm test && gulp webpack --app" #run front-end tests and build app
 alias bbo="npm test && gulp webpack --app overviewTab" # run front-end tests and build Overview Tab
 alias bboc="npm test && gulp webpack --app overviewTab && gaa && gcmsg 'bundle overviewTab'" # run front-end tests,build Overview Tab, and commit it
+alias adev="git rev-parse --abbrev-ref HEAD | tr / - | awk '{print \"https://\"\$1\"-analyze.dev.buffer.com/\"}' | xargs chromium"
+
+# Yarn testing
+alias yt="yarn test & notify-send 'Yarn tests runned'"
+alias ytu="yarn test-update"
 
 # Buffer quality build, this build the front-end app only if linter and tests are sucesful
 alias bqb="glj && bba"
@@ -158,6 +163,9 @@ alias bbosc="glj && bba overviewTab && gaa && gcmsg 'bundle overviewTab'"
 alias s="cd ~/Projects/Seneca/seneca-env"
 alias sup="cd ~/Projects/Seneca/seneca-env && docker-compose up -d && docker ps && cd - "
 alias sstop="cd ~/Projects/Seneca/seneca-env && docker-compose stop && cd -"
+
+# fantasy consoles
+alias p8="~/fantasy_cosole/pico-8/pico8"
 
 # My Theme
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{blue} "

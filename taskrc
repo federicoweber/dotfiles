@@ -81,6 +81,7 @@ uda.priority.default = M
 
 # Urgency
 urgency.user.tag.work.coefficient=5
+urgency.user.tag.bug.coefficient=5
 urgency.user.tag.finance.coefficient=2.5
 
 # Time estimation
