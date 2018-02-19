@@ -4,7 +4,7 @@
     bounce_freq = 0
     follow = mouse
     font = "Fira Sans 16"
-    format = "<b>%a</b>\n<i>%s</i>\n%b"
+    format = "<b>%a</b>\n--------------------------------\n%s %p\n%b"
     geometry = "600x20+12+36"
     horizontal_padding = 12
     idle_threshold = 120
@@ -40,7 +40,7 @@
 [urgency_normal]
     background = "#0c1014"
     foreground = "#2aa889"
-    timeout = 0
+    timeout = 30
 
 [urgency_critical]
     background = "#0c1014"

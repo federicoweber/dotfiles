@@ -84,6 +84,7 @@ alias norddown="sudo kill $(cat ~/vpn-configs/nordvpn.pid)"
 
 # enable aliases in sudo mode http://askubuntu.com/questions/22037/aliases-not-available-when-using-sudo
 alias backup="~/bin/backup.sh"
+alias classname="xprop|grep WM_CLASS"
 alias dcl="docker-compose logs -f"
 alias dl="docker logs -f"
 alias f='fzf-tmux --multi --reverse -h 80% '
@@ -139,7 +140,7 @@ alias !gc="git commit --amend --no-edit && gp -f"
 alias b="cd ~/Projects/Buffer/buffer-dev"
 alias bw="cd ~/Projects/Buffer/buffer-dev/buffer-web"
 alias bup="cd ~/Projects/Buffer/buffer-dev && ./dev up && cd -"
-alias aup="cd ~/Projects/Buffer/buffer-dev && ./dev up session-service account analyze && cd -"
+alias aup="cd ~/Projects/Buffer/buffer-dev && ./dev up session-service login analyze && cd -"
 alias bstop="cd ~/Projects/Buffer/buffer-dev && ./dev stop && cd -"
 alias bps="cd ~/Projects/Buffer/buffer-dev && ./dev ps && cd -"
 alias bbc="npm run compile && cp lib/chronos.js ~/Projects/Buffer/buffer-dev/buffer-web/node_modules/@bufferapp/chronos/lib/chronos.js" #Develop Chronos
@@ -149,7 +150,7 @@ alias bboc="npm test && gulp webpack --app overviewTab && gaa && gcmsg 'bundle o
 alias adev="git rev-parse --abbrev-ref HEAD | tr / - | awk '{print \"https://\"\$1\"-analyze.dev.buffer.com/\"}' | xargs chromium"
 
 # Yarn testing
-alias yt="yarn test & notify-send 'Yarn tests runned'"
+alias yt="yarn test"
 alias ytu="yarn test-update"
 
 # Buffer quality build, this build the front-end app only if linter and tests are sucesful
