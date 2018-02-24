@@ -76,6 +76,8 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 eval $(keychain --eval --quiet id_rsa)
 
 # Here comes some aliases
+alias diskspace=jdiskreport
+
 # VPN
 alias nordup="sudo openvpn --config ~/vpn-configs/us1215.nordvpn.com.udp1194.ovpn \
   --auth-user-pass ~/vpn-configs/credentials.conf \

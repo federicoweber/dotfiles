@@ -30,7 +30,6 @@ else
 fi
 
 # TODO
-# - automate this with https://github.com/jceb/srandrd/
 # - update global apps dpi settings
 
 optirun true
