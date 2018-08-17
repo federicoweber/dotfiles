@@ -36,6 +36,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+# prevent screen off
+xset -dpms
+
 
 # start some nice programs
 #twm &

@@ -18,7 +18,9 @@
     ~/.config/nvim/init.vim: init.vim
     ~/.config/ranger/rc.conf: ranger/rc.conf
     ~/.config/termite/config: termite
+    ~/.config/redshift/redshift.conf: redshift.conf
     ~/.gitignore_global:
+    ~/.gitconfig:
     ~/.gtkrc-2.0:
     ~/.taskrc:
     ~/.tmux.conf:

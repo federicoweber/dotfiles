@@ -177,7 +177,6 @@ let g:tmux_navigator_disable_when_zoomed = 1
 
 " neomake
 let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_php_enabled_makers = ['phpcs']
 autocmd! BufWritePost,BufEnter * Neomake
 
@@ -268,3 +267,10 @@ nmap <leader>x :lclose<CR>     " close location window
 nmap <leader>, :ll<CR>         " go to current error/warning
 nmap <leader>n :lnext<CR>      " next error/warning
 nmap <leader>p :lprev<CR>      " previous error/warning
+
+" better diff colors
+" highlight DiffAdd        xxx term=bold ctermbg=12 guibg=LightCyan
+" highlight DiffChange     xxx term=bold ctermbg=13 guibg=LightBlue
+" highlight DiffDelete     xxx term=bold ctermfg=12 ctermbg=14 gui=bold guifg=Blue guibg=Red
+" highlight DiffText       xxx term=reverse cterm=bold ctermbg=9 gui=bold guibg=Red
+" set t_Co=16

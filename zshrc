@@ -6,7 +6,7 @@ ZSH_TMUX_AUTOSTART="false"
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/fwd/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -100,10 +100,8 @@ alias tm=tmux
 alias tmk='tmux kill-server'
 alias tmks='tmux kill-session -t '
 alias v=nvim
-alias vi=nvim
-alias vim=nvim
 alias vs='nvim -S'
-alias vf='vim `fzf --preview="head -100 {}" --preview-window=right:70%:wrap`' #open files in vim using fzf for search
+alias vf='nvim `fzf --preview="head -100 {}" --preview-window=right:70%:wrap`' #open files in vim using fzf for search
 alias wfl='nmcli dev wifi list'
 alias wfc='nmcli dev wifi connect'
 alias wfu='nmcli con up'
@@ -142,7 +140,7 @@ alias !gc="git commit --amend --no-edit && gp -f"
 alias b="cd ~/Projects/Buffer/buffer-dev"
 alias bw="cd ~/Projects/Buffer/buffer-dev/buffer-web"
 alias bup="cd ~/Projects/Buffer/buffer-dev && ./dev up && cd -"
-alias aup="cd ~/Projects/Buffer/buffer-dev && ./dev up session-service login analyze && cd -"
+alias aup="cd ~/Projects/Buffer/buffer-dev && ./dev up session-service login analyze core-authentication-service && cd -"
 alias bstop="cd ~/Projects/Buffer/buffer-dev && ./dev stop && cd -"
 alias bps="cd ~/Projects/Buffer/buffer-dev && ./dev ps && cd -"
 alias bbc="npm run compile && cp lib/chronos.js ~/Projects/Buffer/buffer-dev/buffer-web/node_modules/@bufferapp/chronos/lib/chronos.js" #Develop Chronos
@@ -190,7 +188,7 @@ RPROMPT=''
 # Local Path
 export GOPATH="$HOME/Golang"
 export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:/home/fwd/.gem/ruby/2.4.0/bin"
+export PATH="$PATH:~/.gem/ruby/2.4.0/bin"
 export PATH="$PATH:./node_modules/.bin"
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:~/.config/composer/vendor/bin"
@@ -198,3 +196,6 @@ export PATH="$PATH:~/.config/composer/vendor/bin"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source /usr/share/nvm/init-nvm.sh
+
+# needed to start tmux on remote servers
+[[ $TERM == xterm-termite ]] && export TERM=xterm

@@ -4,8 +4,8 @@
     bounce_freq = 0
     follow = mouse
     font = "Fira Sans 16"
-    format = "<b>%a</b>\n\n%s %p\n%b"
-    geometry = "600x20+12+36"
+    format = "%a\n\n%s %p\n%b"
+    geometry = "600x20-12-12"
     horizontal_padding = 12
     idle_threshold = 120
     ignore_newline = no
@@ -19,7 +19,7 @@
     sort = yes
     startup_notification = false
     sticky_history = yes
-    transparency = 15
+    transparency = 5
     word_wrap = yes
     frame_width = 1
     frame_color = "#2aa889"
@@ -33,7 +33,7 @@
     foreground = "#33859E"
     frame_color = "#33859E"
     separator_color = "#33859E"
-    timeout = 10
+    timeout = 5
 
 [urgency_normal]
     background = "#0c1014"
@@ -60,3 +60,7 @@
 [notify-send]
     appname = notify-send
     format = "%s %p\n%b"
+
+[fullscreen_show_critical]
+    msg_urgency = critical
+    fullscreen = show
