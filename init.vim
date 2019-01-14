@@ -3,7 +3,8 @@
     " status line
     Plug 'itchyny/lightline.vim'
     " Cool color theme
-    Plug 'whatyouhide/vim-gotham'
+    " Plug 'agreco/vim-citylights'
+    Plug 'arcticicestudio/nord-vim'
     " Color picker & viewer
     Plug 'KabbAmine/vCoolor.vim'
     Plug 'etdev/vim-hexcolor'
@@ -53,7 +54,7 @@ call plug#end()
 
 " Here comes the look
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-colorscheme gotham
+" colorscheme nord
 
 " Sudmode settings
 " disable submode timeouts:
@@ -75,7 +76,7 @@ set ruler "show cursor position
 
 " lightline config
 let g:lightline = {
-      \ 'colorscheme': 'gotham',
+      \ 'colorscheme': 'nord',
       \ 'separator': { 'left': '▓▒░ ', 'right': ' ░▒▓' },
       \ 'subseparator': { 'left': '¦', 'right': '¦' },
       \ 'component': {

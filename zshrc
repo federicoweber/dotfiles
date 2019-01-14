@@ -56,7 +56,7 @@ DEFAULT_USER="fwd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast git-prompt taskwarrior tmux kubectl)
+plugins=(git gitfast git-prompt taskwarrior tmux kubectl ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -71,18 +71,8 @@ export NOTES_PATH=~/Dropbox/Documents/notes
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-export SSH_KEY_PATH="~/.ssh/rsa_id"
-eval $(keychain --eval --quiet id_rsa)
-
 # Here comes some aliases
 alias diskspace=jdiskreport
-
-# VPN
-alias nordup="sudo openvpn --config ~/vpn-configs/us1215.nordvpn.com.udp1194.ovpn \
-  --auth-user-pass ~/vpn-configs/credentials.conf \
-  --daemon --writepid ~/vpn-configs/nordvpn.pid"
-alias norddown="sudo kill $(cat ~/vpn-configs/nordvpn.pid)"
 
 # enable aliases in sudo mode http://askubuntu.com/questions/22037/aliases-not-available-when-using-sudo
 alias backup="~/bin/backup.sh"
@@ -137,13 +127,14 @@ alias glj="git diff --name-only master... | grep -v bundle | grep .jsx*$ | xargs
 alias !gc="git commit --amend --no-edit && gp -f"
 
 # Buffer
-alias b="cd ~/Projects/Buffer/buffer-dev"
-alias bw="cd ~/Projects/Buffer/buffer-dev/buffer-web"
-alias bup="cd ~/Projects/Buffer/buffer-dev && ./dev up && cd -"
-alias aup="cd ~/Projects/Buffer/buffer-dev && ./dev up session-service login analyze core-authentication-service && cd -"
-alias bstop="cd ~/Projects/Buffer/buffer-dev && ./dev stop && cd -"
-alias bps="cd ~/Projects/Buffer/buffer-dev && ./dev ps && cd -"
-alias bbc="npm run compile && cp lib/chronos.js ~/Projects/Buffer/buffer-dev/buffer-web/node_modules/@bufferapp/chronos/lib/chronos.js" #Develop Chronos
+alias bssh="ssh fwd@192.168.11.76"
+alias b="cd ~/Buffer/buffer-dev"
+alias bw="cd ~/Buffer/buffer-dev/buffer-web"
+alias bup="cd ~/Buffer/buffer-dev && ./dev up && cd -"
+alias aup="cd ~/Buffer/buffer-dev && ./dev up session-service login analyze core-authentication-service && cd -"
+alias bstop="cd ~/Buffer/buffer-dev && ./dev stop && cd -"
+alias bps="cd ~/Buffer/buffer-dev && ./dev ps && cd -"
+alias bbc="npm run compile && cp lib/chronos.js ~/Buffer/buffer-dev/buffer-web/node_modules/@bufferapp/chronos/lib/chronos.js" #Develop Chronos
 alias bba="npm test && gulp webpack --app" #run front-end tests and build app
 alias bbo="npm test && gulp webpack --app overviewTab" # run front-end tests and build Overview Tab
 alias bboc="npm test && gulp webpack --app overviewTab && gaa && gcmsg 'bundle overviewTab'" # run front-end tests,build Overview Tab, and commit it
@@ -160,29 +151,30 @@ alias bqb="glj && bba"
 alias bbos="glj && bba overviewTab"
 alias bbosc="glj && bba overviewTab && gaa && gcmsg 'bundle overviewTab'"
 
-# Seneca
-alias s="cd ~/Projects/Seneca/seneca-env"
-alias sup="cd ~/Projects/Seneca/seneca-env && docker-compose up -d && docker ps && cd - "
-alias sstop="cd ~/Projects/Seneca/seneca-env && docker-compose stop && cd -"
-
 # fantasy consoles
 alias p8="~/fantasy_cosole/pico-8/pico8"
 
 # My Theme
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{blue} "
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{cyan}ᚬ "
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_SEPARATOR=""
 ZSH_THEME_GIT_PROMPT_BRANCH=""
-ZSH_THEME_GIT_PROMPT_STAGED="%F{green}%{$bg[black]%} %{ %G%}"
-ZSH_THEME_GIT_PROMPT_CONFLICTS="%F{red}%{$bg[black]%} %{ %G%}"
+ZSH_THEME_GIT_PROMPT_STAGED="%F{cyan}%{$bg[black]%} %{✦  %G%}"
+ZSH_THEME_GIT_PROMPT_CONFLICTS="%F{red}%{$bg[black]%} %{⍉  %G%}"
 ZSH_THEME_GIT_PROMPT_CHANGED="%F{yellow}%{$bg[black]%} %{✚ %G%}"
 ZSH_THEME_GIT_PROMPT_BEHIND="%F{white}%{$bg[black]%} %{↓%G%}"
 ZSH_THEME_GIT_PROMPT_AHEAD="%F{white}%{$bg[black]%} %{↑%G%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{white}%{$bg[black]%} %{ %G%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%F{blue}%{$bg[black]%} "
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{white}%{$bg[black]%} %{… %G%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%F{cyan}%{$bg[black]%} "
 
-PROMPT='%{$bg[green]%}%F{black} %~ %F{green}%{$bg[black]%}▓▒░ $(git_super_status)%{$bg[default]%}%F{black}▓▒░
-%{$bg[default]%}%F{green} %{$reset_color%} '
+if [[ -n $SSH_CONNECTION ]]; then
+    PROMPT_LOGO="≫"
+  else
+    PROMPT_LOGO="λ"
+fi
+
+PROMPT='%{$bg[cyan]%}%F{black} %~ %F{cyan}%{$bg[black]%}▓▒░ $(git_super_status)%{$bg[default]%}%F{black}▓▒░
+%{$bg[default]%}%F{cyan} $PROMPT_LOGO%{$reset_color%} '
 RPROMPT=''
 
 # Local Path
@@ -195,7 +187,10 @@ export PATH="$PATH:~/.config/composer/vendor/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source /usr/share/nvm/init-nvm.sh
 
 # needed to start tmux on remote servers
 [[ $TERM == xterm-termite ]] && export TERM=xterm
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
