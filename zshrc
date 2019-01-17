@@ -127,7 +127,7 @@ alias glj="git diff --name-only master... | grep -v bundle | grep .jsx*$ | xargs
 alias !gc="git commit --amend --no-edit && gp -f"
 
 # Buffer
-alias bssh="ssh fwd@192.168.11.76"
+alias bssh="ssh fwd@192.168.18.44"
 alias b="cd ~/Buffer/buffer-dev"
 alias bw="cd ~/Buffer/buffer-dev/buffer-web"
 alias bup="cd ~/Buffer/buffer-dev && ./dev up && cd -"
