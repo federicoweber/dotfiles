@@ -168,7 +168,7 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{white}%{$bg[black]%} %{… %G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%F{cyan}%{$bg[black]%} "
 
 if [[ -n $SSH_CONNECTION ]]; then
-    PROMPT_LOGO="≫"
+    PROMPT_LOGO=">>"
   else
     PROMPT_LOGO="λ"
 fi

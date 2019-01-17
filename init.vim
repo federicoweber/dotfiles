@@ -48,6 +48,8 @@
     Plug 'uarun/vim-protobuf'
     "Submode
     Plug 'kana/vim-submode'
+    " Local eslint
+    Plug 'benjie/neomake-local-eslint.vim'
 " }
 
 call plug#end()
