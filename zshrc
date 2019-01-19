@@ -68,6 +68,7 @@ export LANG=en_US.UTF-8
 export EDITOR='nvim'
 export NOTES_PATH=~/Dropbox/Documents/notes
 
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -127,7 +128,8 @@ alias glj="git diff --name-only master... | grep -v bundle | grep .jsx*$ | xargs
 alias !gc="git commit --amend --no-edit && gp -f"
 
 # Buffer
-alias bssh="ssh fwd@192.168.18.44"
+export BUFFER_VM=192.168.18.44
+alias bssh="ssh fwd@$BUFFER_VM"
 alias b="cd ~/Buffer/buffer-dev"
 alias bw="cd ~/Buffer/buffer-dev/buffer-web"
 alias bup="cd ~/Buffer/buffer-dev && ./dev up && cd -"

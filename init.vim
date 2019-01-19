@@ -56,7 +56,7 @@ call plug#end()
 
 " Here comes the look
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-" colorscheme nord
+colorscheme nord
 
 " Sudmode settings
 " disable submode timeouts:
@@ -117,20 +117,12 @@ function! LightLineFilename()
   return name
 endfunction
 
-
 " Get rid of disturbing sounds
 set noerrorbells
 
 " Better splitting
 set splitbelow
 set splitright
-" Better splitting resizing
-call submode#enter_with('resize', 'n', '', '<leader>r', '<C-w>-')
-call submode#map('resize', 'n', '', 'j', '12<C-w>-')
-call submode#map('resize', 'n', '', 'k', '12<C-w>+')
-call submode#map('resize', 'n', '', 'h', '12<C-w><')
-call submode#map('resize', 'n', '', 'l', '12<C-w>>')
-call submode#map('resize', 'n', '', '=', '<C-=>=')
 
 " Show space and tabs
 set list
@@ -218,11 +210,11 @@ map <silent> <leader>pl y2wovar_dump(<C-r>0);<esc>
 map <silent> <leader>jl ywoconsole.log(<C-r>0);<esc>
 
 " replace word under cursor in line
-nnoremap  <A-r> yiw <bar> :s/<C-r>0//g<left><left>
+nnoremap  <leader>r yiw <bar> :s/<C-r>0//g<left><left>
 " replace word under cursor in buffer
-nnoremap  <A-R> yiw <bar> :%s/<C-r>0//g<left><left>
+nnoremap  <leader>R yiw <bar> :%s/<C-r>0//g<left><left>
 " replace matching word in visual selection
-vnoremap  <A-r> :s///g<left><left>
+vnoremap  <leader>r :s///g<left><left>
 
 " find word in files
 nnoremap <silent> <leader>ff yiw :Ag <C-r>0<CR>
