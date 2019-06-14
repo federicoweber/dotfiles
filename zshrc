@@ -93,25 +93,10 @@ alias tmks='tmux kill-session -t '
 alias v=nvim
 alias vs='nvim -S'
 alias vf='nvim `fzf --preview="head -100 {}" --preview-window=right:70%:wrap`' #open files in vim using fzf for search
+alias vcs='rm -rf ~/.local/share/nvim/swap' #clenaup swap files
 alias wfl='nmcli dev wifi list'
 alias wfc='nmcli dev wifi connect'
 alias wfu='nmcli con up'
-
-# Taskwarrior
-alias t='clear && task'
-alias ts='t +ACTIVE stop && task'
-alias tc='t context'
-alias ta='t add'
-alias tct='clear && task context today && t'
-alias tctw='clear && task context today_work && t'
-alias tctl='clear && task context today_life && t'
-alias tcw='clear && task context week && t'
-alias tcww='clear && task context week_work && t'
-alias tcwl='clear && task context week_life && t'
-alias tcx='clear && task context none && t'
-
-# Timewarrior
-alias tw='timew'
 
 # Docker
 alias d=docker
@@ -142,9 +127,14 @@ alias bbo="npm test && gulp webpack --app overviewTab" # run front-end tests and
 alias bboc="npm test && gulp webpack --app overviewTab && gaa && gcmsg 'bundle overviewTab'" # run front-end tests,build Overview Tab, and commit it
 alias adev="git rev-parse --abbrev-ref HEAD | tr / - | awk '{print \"https://\"\$1\"-analyze.dev.buffer.com/\"}' | xargs chromium"
 
-# Yarn testing
+# Yarn
+alias y="yarn"
 alias yt="yarn test"
 alias ytu="yarn test-update"
+
+#Jest
+alias j="jest"
+alias jw="jest --watch"
 
 # Buffer quality build, this build the front-end app only if linter and tests are sucesful
 alias bqb="glj && bba"
@@ -186,6 +176,7 @@ export PATH="$PATH:~/.gem/ruby/2.4.0/bin"
 export PATH="$PATH:./node_modules/.bin"
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:~/.config/composer/vendor/bin"
+export PATH="$PATH:~/.composer/vendor/bin/"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

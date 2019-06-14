@@ -206,8 +206,8 @@ map <silent> <leader>sc :SyntasticCheck<CR>
 map <silent> <leader>sx :lcl<CR>
 
 " Log variable under cursor
-map <silent> <leader>pl y2wovar_dump(<C-r>0);<esc>
-map <silent> <leader>jl ywoconsole.log(<C-r>0);<esc>
+map <silent> <leader>pl yiwovar_dump(<C-r>0);<esc>
+map <silent> <leader>jl yiwoconsole.log(<C-r>0);<esc>
 
 " replace word under cursor in line
 nnoremap  <leader>r yiw <bar> :s/<C-r>0//g<left><left>
@@ -217,7 +217,8 @@ nnoremap  <leader>R yiw <bar> :%s/<C-r>0//g<left><left>
 vnoremap  <leader>r :s///g<left><left>
 
 " find word in files
-nnoremap <silent> <leader>ff yiw :Ag <C-r>0<CR>
+nnoremap <leader>ff yiw :tabnew \| Ag <C-r>0
+nnoremap <leader>fi yiw :tabnew \| Ag <C-r>0 --ignore "bundle.js"
 
 " close and save buffer
 nnoremap <C-q> :q<CR>
