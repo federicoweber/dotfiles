@@ -116,16 +116,9 @@ alias !gc="git commit --amend --no-edit && gp -f"
 export BUFFER_VM=192.168.18.44
 alias bssh="ssh fwd@$BUFFER_VM"
 alias b="cd ~/Buffer/buffer-dev"
-alias bw="cd ~/Buffer/buffer-dev/buffer-web"
-alias bup="cd ~/Buffer/buffer-dev && ./dev up && cd -"
-alias aup="cd ~/Buffer/buffer-dev && ./dev up session-service-dev authentication-service-dev login-dev account analyze && cd -"
-alias bstop="cd ~/Buffer/buffer-dev && ./dev stop && cd -"
 alias bps="cd ~/Buffer/buffer-dev && ./dev ps && cd -"
-alias bbc="npm run compile && cp lib/chronos.js ~/Buffer/buffer-dev/buffer-web/node_modules/@bufferapp/chronos/lib/chronos.js" #Develop Chronos
-alias bba="npm test && gulp webpack --app" #run front-end tests and build app
-alias bbo="npm test && gulp webpack --app overviewTab" # run front-end tests and build Overview Tab
-alias bboc="npm test && gulp webpack --app overviewTab && gaa && gcmsg 'bundle overviewTab'" # run front-end tests,build Overview Tab, and commit it
-alias adev="git rev-parse --abbrev-ref HEAD | tr / - | awk '{print \"https://\"\$1\"-analyze.dev.buffer.com/\"}' | xargs chromium"
+#check Buffer dev staging env for current branch
+alias bst="k -n dev get po | grep $(git branch | grep \* | cut -d ' ' -f2 | tr / -)"
 
 # Yarn
 alias y="yarn"
