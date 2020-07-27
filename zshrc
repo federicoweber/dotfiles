@@ -56,7 +56,7 @@ DEFAULT_USER="fwd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast git-prompt taskwarrior tmux kubectl ssh-agent)
+plugins=(git gitfast git-prompt taskwarrior tmux kubectl ssh-agent kubetail)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -102,6 +102,7 @@ alias wfu='nmcli con up'
 alias d=docker
 alias dps="docker ps"
 alias dc=docker-compose
+alias dpunit="docker_phpunit_test.sh";
 
 # Kubectl
 alias k=kubectl
@@ -116,9 +117,13 @@ alias !gc="git commit --amend --no-edit && gp -f"
 export BUFFER_VM=192.168.18.44
 alias bssh="ssh fwd@$BUFFER_VM"
 alias b="cd ~/Buffer/buffer-dev"
+alias dev="~/Buffer/buffer-dev/dev"
 alias bps="cd ~/Buffer/buffer-dev && ./dev ps && cd -"
 #check Buffer dev staging env for current branch
 alias bst="k -n dev get po | grep $(git branch | grep \* | cut -d ' ' -f2 | tr / -)"
+
+#Analyze
+alias apunit="docker_phpunit_test.sh -c bufferdev_analyze-api_1"
 
 # Yarn
 alias y="yarn"
@@ -128,13 +133,6 @@ alias ytu="yarn test-update"
 #Jest
 alias j="jest"
 alias jw="jest --watch"
-
-# Buffer quality build, this build the front-end app only if linter and tests are sucesful
-alias bqb="glj && bba"
-#
-# Buffer Build Oveview Secure
-alias bbos="glj && bba overviewTab"
-alias bbosc="glj && bba overviewTab && gaa && gcmsg 'bundle overviewTab'"
 
 # fantasy consoles
 alias p8="~/fantasy_cosole/pico-8/pico8"

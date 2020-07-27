@@ -50,10 +50,15 @@
     Plug 'kana/vim-submode'
     " Local eslint
     Plug 'benjie/neomake-local-eslint.vim'
+    " Getentag
+    Plug 'ludovicchabant/vim-gutentags'
 " }
 
 call plug#end()
 
+" enable spell-checking
+set spell
+set spelllang=en
 " Here comes the look
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 colorscheme nord
@@ -222,8 +227,8 @@ nnoremap <leader>fi yiw :tabnew \| Ag <C-r>0 --ignore "bundle.js"
 
 " close and save buffer
 nnoremap <C-q> :q<CR>
-nnoremap <C-s> :w<CR>
-inoremap <C-s> <esc>:w<CR>
+nnoremap <C-s> :w!<CR>
+inoremap <C-s> <esc>:w!<CR>
 
 " move line up
 nnoremap <A-j> :m .+1<CR>==

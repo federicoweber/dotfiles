@@ -5,3 +5,5 @@ Session.vim
 node_modules
 tags
 v8-compile-cache-0
+.yalc
+yalc.lock
