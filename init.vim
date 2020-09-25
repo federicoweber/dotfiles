@@ -10,7 +10,7 @@
     Plug 'etdev/vim-hexcolor'
     " Language Sintax
     Plug 'pangloss/vim-javascript'
-    Plug 'styled-components/vim-styled-components'
+    Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
     " GIT
     Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
@@ -36,23 +36,21 @@
     " use Ranger to explore files
     Plug 'francoiscabrol/ranger.vim'
     Plug 'rbgrouleff/bclose.vim'
-    " code completion
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install tern', 'for': ['javascript', 'javascript.jsx'] }
-    Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-    Plug 'ervandew/supertab'
-    " Golang Support
-    Plug 'fatih/vim-go'
-    Plug 'zchee/deoplete-go', { 'do': 'make'}
-    "Protobuf support
-    Plug 'uarun/vim-protobuf'
     "Submode
     Plug 'kana/vim-submode'
     " Local eslint
     Plug 'benjie/neomake-local-eslint.vim'
-    " Getentag
-    Plug 'ludovicchabant/vim-gutentags'
+    " GraphQL
+    Plug 'jparise/vim-graphql'
+    " fast autocomplete
+    Plug 'ervandew/supertab'
 " }
+
+if has('win32') || has('win64')
+  Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
+else
+  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+endif
 
 call plug#end()
 

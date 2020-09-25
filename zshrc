@@ -108,10 +108,11 @@ alias dpunit="docker_phpunit_test.sh";
 alias k=kubectl
 
 # GIT
-# Lint all changed js and jsx in a branch
-alias glj="git diff --name-only master... | grep -v bundle | grep .jsx*$ | xargs eslint -c .eslintrc.json --stdin --quiet -f table"
 # amend and push last commit
 alias !gc="git commit --amend --no-edit && gp -f"
+alias gmc="git branch | grep -E 'main|master' -m 1 | awk '{print $1}' | xargs git checkout | git fetch && git pull"
+alias gclean="gb | grep -E 'fix|task' | xargs git branch -d"
+alias gfclean="gb | grep -E 'fix|task' | xargs git branch -D"
 
 # Buffer
 export BUFFER_VM=192.168.18.44
