@@ -11,6 +11,7 @@
     " Language Sintax
     Plug 'pangloss/vim-javascript'
     Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+    Plug 'leafgarland/typescript-vim'
     " GIT
     Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
@@ -42,10 +43,11 @@
     Plug 'benjie/neomake-local-eslint.vim'
     " GraphQL
     Plug 'jparise/vim-graphql'
-    " fast autocomplete
-    Plug 'ervandew/supertab'
+    " Autocomplete
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " }
 
+" Autocomplete
 if has('win32') || has('win64')
   Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
 else

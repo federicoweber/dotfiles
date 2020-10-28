@@ -7,3 +7,4 @@ tags
 v8-compile-cache-0
 .yalc
 yalc.lock
+.devconfig
