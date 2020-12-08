@@ -39,12 +39,13 @@
     Plug 'rbgrouleff/bclose.vim'
     "Submode
     Plug 'kana/vim-submode'
-    " Local eslint
-    Plug 'benjie/neomake-local-eslint.vim'
     " GraphQL
     Plug 'jparise/vim-graphql'
     " Autocomplete
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    "linting
+    Plug 'dense-analysis/ale'
+    Plug 'benjie/neomake-local-eslint.vim'
 " }
 
 " Autocomplete
@@ -180,6 +181,19 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_php_enabled_makers = ['phpcs']
 autocmd! BufWritePost,BufEnter * Neomake
 
+" Linting
+let g:ale_fixers = {}
+let g:ale_fixers.typescript = ['prettier', 'eslint']
+
+let g:ale_linters = {}
+let g:ale_linters.typescript = ['eslint', 'tsserver']
+
+let g:ale_typescript_prettier_use_local_config = 1
+
+let g:ale_fix_on_save = 1
+
+let g:ale_linters_explicit = 1
+
 " Key bindings
 " Buffer navigation
 nnoremap <silent> [b :bprevious<CR>
@@ -260,14 +274,6 @@ nmap <A-l> :BLines<CR>
 " execute q macro
 vnoremap <leader>q :norm! @q<CR>
 nnoremap <leader>q @q
-
-
-" linter navigation
-nmap <leader>o :lopen<CR>      " open location window
-nmap <leader>x :lclose<CR>     " close location window
-nmap <leader>, :ll<CR>         " go to current error/warning
-nmap <leader>n :lnext<CR>      " next error/warning
-nmap <leader>p :lprev<CR>      " previous error/warning
 
 " better diff colors
 " highlight DiffAdd        xxx term=bold ctermbg=12 guibg=LightCyan
