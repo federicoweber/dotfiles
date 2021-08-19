@@ -169,6 +169,7 @@ export PATH="$PATH:./node_modules/.bin"
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:~/.config/composer/vendor/bin"
 export PATH="$PATH:~/.composer/vendor/bin/"
+export PATH="$PATH:/home/$USER/.local/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

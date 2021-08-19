@@ -226,7 +226,7 @@ map <silent> <leader>sx :lcl<CR>
 
 " Log variable under cursor
 map <silent> <leader>pl yiwovar_dump(<C-r>0);<esc>
-map <silent> <leader>jl yiwoconsole.log(<C-r>0);<esc>
+map <silent> <leader>jl yiwoconsole.log('<C-r>0', <C-r>0);<esc>
 
 " replace word under cursor in line
 nnoremap  <leader>r yiw <bar> :s/<C-r>0//g<left><left>
