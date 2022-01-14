@@ -118,7 +118,6 @@ alias gfclean="gb | grep -E 'fix|task' | xargs git branch -D"
 export BUFFER_VM=192.168.18.44
 alias bssh="ssh fwd@$BUFFER_VM"
 alias b="cd ~/Buffer/buffer-dev"
-alias dev="~/Buffer/buffer-dev/dev"
 alias bps="cd ~/Buffer/buffer-dev && ./dev ps && cd -"
 #check Buffer dev staging env for current branch
 alias bst="k -n dev get po | grep $(git branch | grep \* | cut -d ' ' -f2 | tr / -)"
@@ -170,6 +169,7 @@ export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:~/.config/composer/vendor/bin"
 export PATH="$PATH:~/.composer/vendor/bin/"
 export PATH="$PATH:/home/$USER/.local/bin"
+export PATH=/usr/local/bin:$PATH
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -180,3 +180,8 @@ export PATH="$PATH:/home/$USER/.local/bin"
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
