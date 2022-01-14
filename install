@@ -1,6 +1,3 @@
-assign [class="(?i)gimp"] $ws5
-assign [class="(?i)gimp"] $ws5
-assign [class="(?i)gimp"] $ws5
 #!/usr/bin/env bash
 
 set -e

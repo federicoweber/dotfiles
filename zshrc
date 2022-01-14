@@ -56,7 +56,7 @@ DEFAULT_USER="fwd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast git-prompt taskwarrior tmux kubectl ssh-agent kubetail)
+plugins=(git gitfast git-prompt taskwarrior tmux kubectl ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -170,6 +170,7 @@ export PATH="$PATH:~/.config/composer/vendor/bin"
 export PATH="$PATH:~/.composer/vendor/bin/"
 export PATH="$PATH:/home/$USER/.local/bin"
 export PATH=/usr/local/bin:$PATH
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -180,8 +181,7 @@ export PATH=/usr/local/bin:$PATH
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
