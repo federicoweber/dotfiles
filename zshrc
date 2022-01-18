@@ -111,8 +111,8 @@ alias k=kubectl
 # amend and push last commit
 alias !gc="git commit --amend --no-edit && gp -f"
 alias gmc="git branch | grep -E 'main|master' -m 1 | awk '{print $1}' | xargs git checkout | git fetch && git pull"
-alias gclean="gb | grep -E 'fix|task' | xargs git branch -d"
-alias gfclean="gb | grep -E 'fix|task' | xargs git branch -D"
+alias gclean="gb | grep -v main | xargs git branch -d"
+alias gfclean="gb | grep -v main | xargs git branch -D"
 
 # Buffer
 export BUFFER_VM=192.168.18.44
