@@ -2,73 +2,76 @@
   " Plugins {
     " status line
     Plug 'itchyny/lightline.vim'
+
     " Cool color theme
-    " Plug 'agreco/vim-citylights'
     Plug 'arcticicestudio/nord-vim'
+
     " Color picker & viewer
-    Plug 'KabbAmine/vCoolor.vim'
     Plug 'etdev/vim-hexcolor'
+
     " Language Sintax
     Plug 'pangloss/vim-javascript'
     Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
     Plug 'leafgarland/typescript-vim'
+
     " GIT
     Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
+
     " VIM Buffer
     Plug  'bling/vim-bufferline'
-    " Linter
-    Plug 'neomake/neomake'
+
     " finder
     Plug 'rking/ag.vim'
-    " fzf finder
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'junegunn/fzf.vim'
+
     " text manipulation
     Plug 'tpope/vim-surround'
+
     " Manage sessions
     Plug 'tpope/vim-obsession'
+
     " better split navigation
     Plug 'christoomey/vim-tmux-navigator'
-    " phpcbf in vim
-    Plug 'beanworks/vim-phpfmt'
+
     " indentation style with config files
     Plug 'editorconfig/editorconfig-vim'
+
     " use Ranger to explore files
     Plug 'francoiscabrol/ranger.vim'
     Plug 'rbgrouleff/bclose.vim'
-    "Submode
-    Plug 'kana/vim-submode'
-    " GraphQL
+
+    " Telescope
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-fzy-native.nvim'
+    " Graphql
     Plug 'jparise/vim-graphql'
-    " Autocomplete
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    "linting
-    Plug 'dense-analysis/ale'
-    Plug 'benjie/neomake-local-eslint.vim'
+
+    " JSX & Typescript
+    Plug 'pangloss/vim-javascript'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'peitalin/vim-jsx-typescript'
+
+    " Intellisense Engine
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    " .editorconfig
+    Plug 'editorconfig/editorconfig-vim'
 " }
 
-" Autocomplete
-if has('win32') || has('win64')
-  Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
-else
-  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-endif
-
 call plug#end()
+
+" Automatically re-read file if a change was detected outside of vim
+set autoread
 
 " enable spell-checking
 set spell
 set spelllang=en
+
 " Here comes the look
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 colorscheme nord
-
-" Sudmode settings
-" disable submode timeouts:
-let g:submode_timeout = 0
-" don't consume submode-leaving key
-let g:submode_keep_leaving_key = 1
 
 " line numbers
 set relativenumber "show relative line numbers
@@ -148,20 +151,8 @@ set hlsearch "highlight search
 "clear search highlight
 nnoremap <silent> <C-space> :<C-u>nohlsearch<CR>
 
-"  code completion
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:SuperTabClosePreviewOnPopupClose = 1
-
-" disable automatic formatting for php
-let g:phpfmt_autosave = 0
 
 " Tools
-" Fuzzy file finder
-function! s:find_git_root()
-  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-endfunction
-
 command! ProjectFiles execute 'Files' s:find_git_root()
 
 nnoremap <C-p>  :ProjectFiles<CR>
@@ -176,23 +167,6 @@ nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 " Disable tmux navigator when zooming the Vim pane
 let g:tmux_navigator_disable_when_zoomed = 1
 
-" neomake
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_php_enabled_makers = ['phpcs']
-autocmd! BufWritePost,BufEnter * Neomake
-
-" Linting
-let g:ale_fixers = {}
-let g:ale_fixers.typescript = ['prettier', 'eslint']
-
-let g:ale_linters = {}
-let g:ale_linters.typescript = ['eslint', 'tsserver']
-
-let g:ale_typescript_prettier_use_local_config = 1
-
-let g:ale_fix_on_save = 1
-
-let g:ale_linters_explicit = 1
 
 " Key bindings
 " Buffer navigation
@@ -218,11 +192,6 @@ map <silent> <leader>gb :Gblame<CR>
 map <silent> <leader>gc :Gcommit<CR>
 map <silent> <leader>gl :Glog -- %<CR>
 map <silent> <leader>gs :Gstatus<CR>
-
-" Syntastic bindings
-map <silent> <leader>st :SyntasticToggleMode<CR>
-map <silent> <leader>sc :SyntasticCheck<CR>
-map <silent> <leader>sx :lcl<CR>
 
 " Log variable under cursor
 map <silent> <leader>pl yiwovar_dump(<C-r>0);<esc>
@@ -281,3 +250,87 @@ nnoremap <leader>q @q
 " highlight DiffDelete     xxx term=bold ctermfg=12 ctermbg=14 gui=bold guifg=Blue guibg=Red
 " highlight DiffText       xxx term=reverse cterm=bold ctermbg=9 gui=bold guibg=Red
 " set t_Co=16
+
+" === Coc.nvim === "
+" use <tab> for trigger completion and navigate to next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+nmap <silent> <leader>dd <Plug>(coc-definition)
+nmap <silent> <leader>dr <Plug>(coc-references)
+nmap <silent> <leader>dj <Plug>(coc-implementation)
+nmap <silent> <leader>f :CocCommand prettier.formatFile<cr>
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+" vmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
+"
+nmap <leader>rn <Plug>(coc-rename)
+nmap <silent> K :call CocAction('doHover')<CR>
+
+function! ShowDocIfNoDiagnostic(timer_id)
+  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
+    silent call CocActionAsync('doHover')
+  endif
+endfunction
+
+function! s:show_hover_doc()
+  call timer_start(500, 'ShowDocIfNoDiagnostic')
+endfunction
+
+autocmd CursorHoldI * :call <SID>show_hover_doc()
+autocmd CursorHold * :call <SID>show_hover_doc()
+"
+" === vim-better-whitespace === "
+"   <leader>y - Automatically remove trailing whitespace
+nmap <leader>y :StripWhitespace<CR>
+
+" === Telescope === "
+nnoremap ff :lua require('telescope.builtin').git_files()<CR>
+nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
+nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+lua << EOS
+local pickers = require("telescope.pickers")
+local finders = require("telescope.finders")
+local previewers = require("telescope.previewers")
+local action_state = require("telescope.actions.state")
+local conf = require("telescope.config").values
+local actions = require("telescope.actions")
+
+require("telescope").setup({
+    defaults = {
+        file_sorter = require("telescope.sorters").get_fzy_sorter,
+        prompt_prefix = " >",
+        color_devicons = true,
+
+        file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+        grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+        qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+
+        mappings = {
+            i = {
+                ["<C-q>"] = actions.send_to_qflist,
+            },
+        },
+    },
+    extensions = {
+        fzy_native = {
+            override_generic_sorter = false,
+            override_file_sorter = true,
+        },
+    },
+})
+
+require("telescope").load_extension("fzy_native")
+EOS
+

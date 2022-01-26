@@ -90,7 +90,7 @@ alias sudo="sudo "
 alias tm=tmux
 alias tmk='tmux kill-server'
 alias tmks='tmux kill-session -t '
-alias v=nvim
+alias v=~/apps/nvim.appimage
 alias vs='nvim -S'
 alias vf='nvim `fzf --preview="head -100 {}" --preview-window=right:70%:wrap`' #open files in vim using fzf for search
 alias vcs='rm -rf ~/.local/share/nvim/swap' #clenaup swap files
