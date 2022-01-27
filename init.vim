@@ -151,14 +151,6 @@ set hlsearch "highlight search
 "clear search highlight
 nnoremap <silent> <C-space> :<C-u>nohlsearch<CR>
 
-
-" Tools
-command! ProjectFiles execute 'Files' s:find_git_root()
-
-nnoremap <C-p>  :ProjectFiles<CR>
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-let g:fzf_height = 100
-
 " Toggle Session recording with Obsession
 map <silent> <leader>s :Obsession<CR>
 
@@ -296,7 +288,7 @@ autocmd CursorHold * :call <SID>show_hover_doc()
 nmap <leader>y :StripWhitespace<CR>
 
 " === Telescope === "
-nnoremap ff :lua require('telescope.builtin').git_files()<CR>
+nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 lua << EOS
