@@ -3,14 +3,15 @@
 	name = Federico Weber
 [core]
 	excludesfile = /home/fwd/.gitignore_global
+	editor = vim
 [mergetool]
-	path = nvim
+	path = /home/fwd/apps/nvim.appimage
 [merge]
   tool = vimdiff
 [mergetool]
   prompt = true
 [mergetool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  cmd = /home/fwd/apps/nvim.appimage -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [difftool]
   prompt = false
 [diff]

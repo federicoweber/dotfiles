@@ -91,8 +91,8 @@ alias tm=tmux
 alias tmk='tmux kill-server'
 alias tmks='tmux kill-session -t '
 alias v=~/apps/nvim.appimage
-alias vs='nvim -S'
-alias vf='nvim `fzf --preview="head -100 {}" --preview-window=right:70%:wrap`' #open files in vim using fzf for search
+alias vs='~/apps/nvim.appimage -S'
+alias vf='~/apps/nvim.appimage `fzf --preview="head -100 {}" --preview-window=right:70%:wrap`' #open files in vim using fzf for search
 alias vcs='rm -rf ~/.local/share/nvim/swap' #clenaup swap files
 alias wfl='nmcli dev wifi list'
 alias wfc='nmcli dev wifi connect'
@@ -185,3 +185,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# set browser for WSL
+export BROWSER=/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe

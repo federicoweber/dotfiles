@@ -180,10 +180,10 @@ nnoremap <silent> ]C :clast<CR>
 
 "Git bindings
 map <silent> <leader>ga :Git add %<CR>
-map <silent> <leader>gb :Gblame<CR>
-map <silent> <leader>gc :Gcommit<CR>
-map <silent> <leader>gl :Glog -- %<CR>
-map <silent> <leader>gs :Gstatus<CR>
+map <silent> <leader>gb :Git blame<CR>
+map <silent> <leader>gc :Git commit<CR>
+map <silent> <leader>gl :Git log -- %<CR>
+map <silent> <leader>gs :Git<CR>
 
 " Log variable under cursor
 map <silent> <leader>pl yiwovar_dump(<C-r>0);<esc>
