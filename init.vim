@@ -257,7 +257,7 @@ inoremap <silent><expr> <TAB>
 
 nmap <silent> <leader>dd <Plug>(coc-definition)
 nmap <silent> <leader>dr <Plug>(coc-references)
-nmap <silent> <leader>dj <Plug>(coc-implementation)
+nmap <silent> <leader>di <Plug>(coc-implementation)
 nmap <silent> <leader>f :CocCommand prettier.formatFile<cr>
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Applying codeAction to the selected region.

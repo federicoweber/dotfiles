@@ -122,9 +122,6 @@ alias bps="cd ~/Buffer/buffer-dev && ./dev ps && cd -"
 #check Buffer dev staging env for current branch
 alias bst="k -n dev get po | grep $(git branch | grep \* | cut -d ' ' -f2 | tr / -)"
 
-#Analyze
-alias apunit="docker_phpunit_test.sh -c bufferdev_analyze-api_1"
-
 # Yarn
 alias y="yarn"
 alias yt="yarn test"
