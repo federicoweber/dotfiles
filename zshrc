@@ -180,8 +180,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
 # set browser for WSL
 export BROWSER=/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe
+
+# mcfly
+eval "$(mcfly init zsh)"
