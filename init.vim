@@ -30,6 +30,9 @@
     " Manage sessions
     Plug 'tpope/vim-obsession'
 
+    " Comments
+    Plug 'tpope/vim-commentary'
+
     " better split navigation
     Plug 'christoomey/vim-tmux-navigator'
 
@@ -264,11 +267,10 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Example: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
-" vmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
-"
 nmap <leader>rn <Plug>(coc-rename)
 nmap <silent> K :call CocAction('doHover')<CR>
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 function! ShowDocIfNoDiagnostic(timer_id)
   if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
