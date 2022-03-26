@@ -258,10 +258,10 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 
-nmap <silent> <leader>dd <Plug>(coc-definition)
-nmap <silent> <leader>dr <Plug>(coc-references)
-nmap <silent> <leader>di <Plug>(coc-implementation)
-nmap <silent> <leader>f :CocCommand prettier.formatFile<cr>
+nmap <silent> <leader>dd :call CocAction('jumpDefinition', 'split')<CR>
+nmap <silent> <leader>dr :call CocAction('jumpReferences', 'tabe')<CR>
+nmap <silent> <leader>di :call CocAction('jumpImplementation', 'split')<CR>
+nmap <silent> <leader>f :CocCommand prettier.formatFile<CR>
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
@@ -328,3 +328,4 @@ require("telescope").setup({
 require("telescope").load_extension("fzy_native")
 EOS
 
+:set mouse=nv
