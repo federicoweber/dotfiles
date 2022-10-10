@@ -47,10 +47,19 @@ alias t=tmux
 alias tm=tmux
 alias tmk='tmux kill-server'
 alias tmks='tmux kill-session -t '
-alias v=~/apps/nvim.appimage
-alias vs='~/apps/nvim.appimage -S'
-alias vf='~/apps/nvim.appimage `fzf --preview="head -100 {}" --preview-window=right:70%:wrap`' #open files in vim using fzf for search
-alias vcs='rm -rf ~/.local/share/nvim/swap' #clenaup swap files
+
+# vim
+if [[ $OSTYPE == 'darwin'* ]]; then
+  alias v=/opt/homebrew/bin/nvim
+  alias vs='/opt/homebrew/bin/nvim -S'
+  alias vf='/opt/homebrew/bin/nvim `fzf --preview="head -100 {}" --preview-window=right:70%:wrap`' #open files in vim using fzf for search
+  alias vcs='rm -rf /opt/homebrew/bin/nvim/nvim/swap' #clenaup swap files
+else
+  alias v=~/apps/nvim.appimage
+  alias vs='~/apps/nvim.appimage -S'
+  alias vf='~/apps/nvim.appimage `fzf --preview="head -100 {}" --preview-window=right:70%:wrap`' #open files in vim using fzf for search
+  alias vcs='rm -rf ~/.local/share/nvim/swap' #clenaup swap files
+fi
 
 # Docker
 alias d=docker
