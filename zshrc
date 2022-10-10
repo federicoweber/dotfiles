@@ -8,6 +8,9 @@ ZSH_TMUX_AUTOSTART="false"
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
+# My Theme
+ZSH_THEME="spaceship"
+
 DEFAULT_USER="fwd"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
@@ -77,9 +80,6 @@ alias jw="jest --watch"
 # fantasy consoles
 alias p8="~/fantasy_cosole/pico-8/pico8"
 
-# My Theme
-ZSH_THEME="spaceship"
-
 # Local Path
 export GOPATH="$HOME/Golang"
 export PATH="$PATH:$GOPATH/bin"
@@ -96,17 +96,28 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# needed to start tmux on remote servers
-[[ $TERM == xterm-termite ]] && export TERM=xterm
-
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# set browser for WSL
-if grep -qi microsoft /proc/version; then
+# Python Pyenv
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# OS Specific
+if [[ $OSTYPE == 'darwin'* ]]; then
+  # OSX
+  echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/fwd/.zprofile
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/fwd/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif grep -qi microsoft /proc/version; then
+  # WSL
+  # set browser for WSL
   export BROWSER=/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe
+  # needed to start tmux on remote servers
+  [[ $TERM == xterm-termite ]] && export TERM=xterm
 fi
 
 #python
