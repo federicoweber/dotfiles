@@ -104,10 +104,23 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# set browser for WSL
-if grep -qi microsoft /proc/version; then
+# Python Pyenv
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# OS Specific
+if [[ $OSTYPE == 'darwin'* ]]; then
+  # OSX
+  echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/fwd/.zprofile
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/fwd/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif grep -qi microsoft /proc/version; then
+  # WSL
+  # set browser for WSL
   export BROWSER=/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe
 fi
+
 
 # mcfly
 eval "$(mcfly init zsh)"
