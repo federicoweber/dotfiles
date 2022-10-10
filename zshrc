@@ -14,16 +14,9 @@ DEFAULT_USER="fwd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast git-prompt tmux kubectl ssh-agent command-time)
+plugins=(git gitfast tmux kubectl ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
-
-# command-time config
-# # Message to display (set to "" for disable).
-ZSH_COMMAND_TIME_MSG="took %s"
-
-# Message color.
-ZSH_COMMAND_TIME_COLOR="yellow"
 
 # User configuration
 
@@ -85,27 +78,7 @@ alias jw="jest --watch"
 alias p8="~/fantasy_cosole/pico-8/pico8"
 
 # My Theme
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{cyan}ᚬ "
-ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_SEPARATOR=""
-ZSH_THEME_GIT_PROMPT_BRANCH=""
-ZSH_THEME_GIT_PROMPT_STAGED="%F{cyan}%{$bg[black]%} %{✦  %G%}"
-ZSH_THEME_GIT_PROMPT_CONFLICTS="%F{red}%{$bg[black]%} %{⍉  %G%}"
-ZSH_THEME_GIT_PROMPT_CHANGED="%F{yellow}%{$bg[black]%} %{✚ %G%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%F{white}%{$bg[black]%} %{↓%G%}"
-ZSH_THEME_GIT_PROMPT_AHEAD="%F{white}%{$bg[black]%} %{↑%G%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{white}%{$bg[black]%} %{… %G%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%F{cyan}%{$bg[black]%} "
-
-if [[ -n $SSH_CONNECTION ]]; then
-    PROMPT_LOGO=">>"
-  else
-    PROMPT_LOGO="λ"
-fi
-
-PROMPT='%{$bg[cyan]%}%F{black} %~ %F{cyan}%{$bg[black]%}▓▒░ $(git_super_status)%{$bg[default]%}%F{black}▓▒░
-%{$bg[default]%}%F{cyan} $PROMPT_LOGO%{$reset_color%} '
-RPROMPT=''
+ZSH_THEME="spaceship"
 
 # Local Path
 export GOPATH="$HOME/Golang"
@@ -135,6 +108,9 @@ export NVM_DIR="$HOME/.nvm"
 if grep -qi microsoft /proc/version; then
   export BROWSER=/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe
 fi
+
+#python
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # mcfly
 eval "$(mcfly init zsh)"
