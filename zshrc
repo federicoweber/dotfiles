@@ -134,3 +134,6 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # mcfly
 eval "$(mcfly init zsh)"
+
+# Direnv needed for Trunk
+eval "$(direnv hook zsh)"
