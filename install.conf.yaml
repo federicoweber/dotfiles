@@ -17,5 +17,13 @@
     ~/.zshrc:
     ~/bin: bin
 
+- git:
+  '~/.oh-my-zsh/custom/plugins/command-time':
+    url: 'https://github.com/popstas/zsh-command-time.git'
+    description: 'oh my zsh - command time'
+  '~/.oh-my-zsh/custom/plugins/zsh-autosuggestions':
+    url: 'https://github.com/zsh-users/zsh-autosuggestions'
+    description: 'oh my zsh - autosuggestions'
+
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
