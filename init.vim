@@ -61,6 +61,9 @@
 
     " .editorconfig
     Plug 'editorconfig/editorconfig-vim'
+
+    " nerdtree
+    Plug 'preservim/nerdtree'
 " }
 
 call plug#end()
@@ -238,6 +241,9 @@ nmap <A-l> :BLines<CR>
 " execute q macro
 vnoremap <leader>q :norm! @q<CR>
 nnoremap <leader>q @q
+
+" Start NERDTree and put the cursor back in the other window.
+autocmd VimEnter * NERDTree | wincmd p
 
 " better diff colors
 " highlight DiffAdd        xxx term=bold ctermbg=12 guibg=LightCyan

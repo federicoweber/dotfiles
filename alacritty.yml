@@ -20,10 +20,12 @@ window:
   padding:
     x: 10
     y: 10
+  opacity:
+    .95
   # Remove buttons
-  decorations: none
+  decorations: buttonless
   # Open in full screen 
-  startup_mode: SimpleFullscreen
+  # startup_mode: SimpleFullscreen
 
 font:
   family: FiraCode
