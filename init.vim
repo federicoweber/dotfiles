@@ -256,6 +256,9 @@ autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
+" Find opened file in NERDTree.
+autocmd BufWinEnter * silent NERDTreeFind
+
 " better diff colors
 " highlight DiffAdd        xxx term=bold ctermbg=12 guibg=LightCyan
 " highlight DiffChange     xxx term=bold ctermbg=13 guibg=LightBlue
