@@ -62,8 +62,6 @@
     " .editorconfig
     Plug 'editorconfig/editorconfig-vim'
 
-    " nerdtree
-    Plug 'preservim/nerdtree'
 " }
 
 call plug#end()
@@ -242,23 +240,6 @@ nmap <A-l> :BLines<CR>
 vnoremap <leader>q :norm! @q<CR>
 nnoremap <leader>q @q
 
-" NERDTree
-" Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
-
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
-" Open the existing NERDTree on each new tab.
-autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
-
-" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-
-" Find opened file in NERDTree.
-autocmd BufWinEnter * silent NERDTreeFind
-
 " better diff colors
 " highlight DiffAdd        xxx term=bold ctermbg=12 guibg=LightCyan
 " highlight DiffChange     xxx term=bold ctermbg=13 guibg=LightBlue
@@ -277,6 +258,9 @@ inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
+
+" Use Enter to confirm completion
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 
 nmap <silent> <leader>dd :call CocAction('jumpDefinition', 'split')<CR>
 nmap <silent> <leader>dr :call CocAction('jumpReferences', 'tabe')<CR>

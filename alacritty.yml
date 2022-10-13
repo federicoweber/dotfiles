@@ -27,8 +27,16 @@ window:
   # startup_mode: SimpleFullscreen
 
 font:
-  family: FiraCode
-
+  font:
+    normal:
+      family: Fira Code Nerd Font
+      style: Regular
+    bold:
+      family: Fira Code Nerd Font
+      style: Bold
+    italic:
+      family: Fira Code Nerd Font
+      style: Italic
   size: 14
 
 colors:
