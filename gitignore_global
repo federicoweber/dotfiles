@@ -2,6 +2,7 @@
 .tern-port
 .vscode
 Session.vim
+Session.vim.*
 node_modules
 tags
 v8-compile-cache-0
