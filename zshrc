@@ -73,9 +73,10 @@ alias k=kubectl
 # GIT
 # amend and push last commit
 alias !gc="git commit --amend --no-edit && gp -f"
-alias gmc="git branch | grep -E 'main|master' -m 1 | awk '{print $1}' | xargs git checkout | git fetch && git pull"
-alias gclean="gb | grep -v main | xargs git branch -d"
-alias gfclean="gb | grep -v main | xargs git branch -D"
+alias gcm="git branch | grep -E 'main|master' -m 1 | awk '{print $1}' | xargs git checkout | git fetch && git pull"
+alias gclean="git branch | grep -v main | xargs git branch -d"
+alias gfclean="git branch | grep -v main | xargs git branch -D"
+alias gb="git --no-pager branch"
 
 # Yarn
 alias y="yarn"
