@@ -1,5 +1,5 @@
 # auto start tmux
-ZSH_TMUX_AUTOSTART="true"
+ZSH_TMUX_AUTOSTART="false"
 # if [ "$TMUX" = "" ]; then tmux; fi
 
 # If you come from bash you might have to change your $PATH.
