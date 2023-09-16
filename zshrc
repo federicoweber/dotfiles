@@ -140,3 +140,12 @@ eval "$(mcfly init zsh)"
 
 # Direnv needed for Trunk
 eval "$(direnv hook zsh)"
+
+# pnpm
+export PNPM_HOME="/Users/fwd/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+test -f /Users/fwd/.cache/trunk/shell-hooks/zsh.rc && source /Users/fwd/.cache/trunk/shell-hooks/zsh.rc;
