@@ -80,17 +80,9 @@ alias gclean="git branch | grep -v main | xargs git branch -d"
 alias gfclean="git branch | grep -v main | xargs git branch -D"
 alias gb="git --no-pager branch"
 
-# Yarn
-alias y="yarn"
-alias yt="yarn test"
-alias ytu="yarn test-update"
-
 #Jest
 alias j="jest"
 alias jw="jest --watch"
-
-# fantasy consoles
-alias p8="~/fantasy_cosole/pico-8/pico8"
 
 # Local Path
 export GOPATH="$HOME/Golang"
@@ -112,6 +104,14 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# use nvm version for the given folder
+cd() {
+    builtin cd "$@"
+    if [ -f ".nvmrc" ]; then
+        nvm use
+    fi
+}
 
 # Python Pyenv
 if command -v pyenv 1>/dev/null 2>&1; then
@@ -149,3 +149,4 @@ case ":$PATH:" in
 esac
 # pnpm end
 test -f /Users/fwd/.cache/trunk/shell-hooks/zsh.rc && source /Users/fwd/.cache/trunk/shell-hooks/zsh.rc;
+
