@@ -1,5 +1,5 @@
 echo "Installing ZSH plugins"
-ZSH_CUSTOM_DIR="~/.oh-my-zsh/custom"
+ZSH_CUSTOM_DIR="${HOME}/.oh-my-zsh/custom"
 
 if [ ! -d "${ZSH_CUSTOM_DIR}/themes/spaceship-prompt" ]
 then
