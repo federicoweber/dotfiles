@@ -68,6 +68,7 @@ alias d=docker
 alias dps="docker ps"
 alias dc=docker-compose
 alias dpunit="docker_phpunit_test.sh";
+alias dka="docker stop $(docker ps -a -q)" # stop all containers
 
 # Kubectl
 alias k=kubectl
