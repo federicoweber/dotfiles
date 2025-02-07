@@ -85,6 +85,13 @@ alias gb="git --no-pager branch"
 alias j="jest"
 alias jw="jest --watch"
 
+# Pyenv configuration - needs to be early in the file
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 # Local Path
 export GOPATH="$HOME/Golang"
 export PATH="$PATH:$GOPATH/bin"
@@ -133,11 +140,9 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
-
-
-# Python Pyenv
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+# Direnv configuration
+if command -v direnv >/dev/null; then
+  eval "$(direnv hook zsh)"
 fi
 
 # OS Specific
@@ -159,9 +164,6 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # mcfly
 eval "$(mcfly init zsh)"
-
-# Direnv needed for Trunk
-eval "$(direnv hook zsh)"
 
 # pnpm
 export PNPM_HOME="/Users/fwd/Library/pnpm"
