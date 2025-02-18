@@ -19,7 +19,7 @@ DEFAULT_USER="fwd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast tmux kubectl ssh-agent)
+plugins=(git gitfast tmux kubectl ssh-agent gcloud)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -173,4 +173,3 @@ case ":$PATH:" in
 esac
 # pnpm end
 test -f /Users/fwd/.cache/trunk/shell-hooks/zsh.rc && source /Users/fwd/.cache/trunk/shell-hooks/zsh.rc;
-
