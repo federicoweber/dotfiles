@@ -6,7 +6,7 @@
 - clean: ['~', '~/.config']
 
 - link:
-    ~/.alacritty.yml:
+    ~/.alacritty.toml:
     ~/.config/nvim/init.vim: init.vim
     ~/.config/ranger/rc.conf: ranger/rc.conf
     ~/.gitignore_global:
