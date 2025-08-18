@@ -13,8 +13,6 @@ export ZSH=~/.oh-my-zsh
 ZSH_THEME="spaceship"
 SPACESHIP_HOST_SHOW="true"
 
-DEFAULT_USER="fwd"
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -166,10 +164,9 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 eval "$(mcfly init zsh)"
 
 # pnpm
-export PNPM_HOME="/Users/fwd/Library/pnpm"
+export PNPM_HOME="/Users/federicoweber/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-test -f /Users/fwd/.cache/trunk/shell-hooks/zsh.rc && source /Users/fwd/.cache/trunk/shell-hooks/zsh.rc;

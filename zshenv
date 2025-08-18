@@ -6,4 +6,4 @@ export KUBECONFIG=$HOME/.kube/config
 export LS_COLORS=$LS_COLORS:'di=4;32:'
 export LS_COLORS=$LS_COLORS:'ow=0;36:'
 
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
