@@ -170,3 +170,26 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# opperator
+export PATH=/Users/federicoweber/.opperator/bin:$PATH
+
+# TOWN
+export TOWN_EMAIL_HUB_PROJECTS=~/agent_hub_projects
+
+# Email Hub multi-checkout
+twn-p() {
+  if [ -z "$1" ]; then
+    echo "Usage: twn-p <N>" >&2
+    return 1
+  fi
+  local dir="$TOWN_EMAIL_HUB_PROJECTS/town$1"
+  if [ -d "$dir" ]; then
+    cd "$dir"
+  else
+    (cd ~/email-hub && scripts/setup-multi-checkout.sh -n "$1" --root-projects-dir "$TOWN_EMAIL_HUB_PROJECTS") && cd "$dir"
+  fi
+}
+
+# Claude
+export PATH="$HOME/.local/bin:$PATH"

@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(~/.tmux/plugins/tpm/bin/install_plugins:*)"
     ],
     "deny": [],
     "ask": []
