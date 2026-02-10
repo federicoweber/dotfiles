@@ -180,14 +180,22 @@ export TOWN_EMAIL_HUB_PROJECTS=~/agent_hub_projects
 # Email Hub multi-checkout
 twn-p() {
   if [ -z "$1" ]; then
-    echo "Usage: twn-p <N>" >&2
+    echo "Usage: twn-p <N> [--run]" >&2
     return 1
   fi
-  local dir="$TOWN_EMAIL_HUB_PROJECTS/town$1"
+  local num="$1"
+  local run=false
+  if [ "$2" = "--run" ] || [ "$2" = "-r" ]; then
+    run=true
+  fi
+  local dir="$TOWN_EMAIL_HUB_PROJECTS/town$num"
   if [ -d "$dir" ]; then
     cd "$dir"
   else
-    (cd ~/email-hub && scripts/setup-multi-checkout.sh -n "$1" --root-projects-dir "$TOWN_EMAIL_HUB_PROJECTS") && cd "$dir"
+    (cd ~/email-hub && scripts/setup-multi-checkout.sh -n "$num" --root-projects-dir "$TOWN_EMAIL_HUB_PROJECTS") && cd "$dir"
+  fi
+  if $run; then
+    npm i && npx tsx scripts/local-convex-backend.ts
   fi
 }
 
