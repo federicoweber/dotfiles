@@ -18,6 +18,7 @@
     ~/.zshrc:
     ~/bin: bin
     ~/.spaceshiprc.zsh:
+    ~/.claude/CLAUDE.md: claude/CLAUDE.md
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
