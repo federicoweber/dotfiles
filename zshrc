@@ -164,7 +164,7 @@ twn-p() {
     (cd ~/email-hub && scripts/setup-multi-checkout.sh -n "$num" --root-projects-dir "$TOWN_EMAIL_HUB_PROJECTS") && cd "$dir"
   fi
   if $run; then
-    npm i && npx tsx scripts/local-convex-backend.ts
+    source "${NVM_DIR:-$HOME/.nvm}/nvm.sh" && nvm use && bun scripts/local-convex-backend.ts
   fi
 }
 
