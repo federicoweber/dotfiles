@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(test:*)",
-      "Bash(~/.tmux/plugins/tpm/bin/install_plugins:*)"
+      "Bash(~/.tmux/plugins/tpm/bin/install_plugins:*)",
+      "Bash(bash -n /Users/federicoweber/dotfiles/bin/twn-p)",
+      "Bash(/Users/federicoweber/dotfiles/bin/twn-p --help)",
+      "Bash(TOWN_EMAIL_HUB_PROJECTS=/tmp/fake /Users/federicoweber/dotfiles/bin/twn-p 999)"
     ],
     "deny": [],
     "ask": []

@@ -146,26 +146,23 @@ export PATH=/Users/federicoweber/.opperator/bin:$PATH
 # TOWN
 export TOWN_EMAIL_HUB_PROJECTS=~/agent_hub_projects
 
-# Email Hub multi-checkout
+# Email Hub multi-checkout — thin wrapper around ~/bin/twn-p so we can cd
+# in the current shell. The script handles help, setup, and the tmux layout;
+# cd and `--run` need shell state so they stay here.
 twn-p() {
-  if [ -z "$1" ]; then
-    echo "Usage: twn-p <N> [--run]" >&2
-    return 1
-  fi
-  local num="$1"
-  local run=false
-  if [ "$2" = "--run" ] || [ "$2" = "-r" ]; then
-    run=true
-  fi
-  local dir="$TOWN_EMAIL_HUB_PROJECTS/town$num"
-  if [ -d "$dir" ]; then
-    cd "$dir"
-  else
-    (cd ~/email-hub && scripts/setup-multi-checkout.sh -n "$num" --root-projects-dir "$TOWN_EMAIL_HUB_PROJECTS") && cd "$dir"
-  fi
-  if $run; then
-    source "${NVM_DIR:-$HOME/.nvm}/nvm.sh" && nvm use && bun scripts/local-convex-backend.ts
-  fi
+  local dir
+  dir=$(command twn-p "$@") || return $?
+  [ -n "$dir" ] || return 0
+  cd "$dir" || return 1
+  local arg
+  for arg in "$@"; do
+    case "$arg" in
+      -r|--run)
+        source "${NVM_DIR:-$HOME/.nvm}/nvm.sh" && nvm use && bun scripts/local-convex-backend.ts
+        return
+        ;;
+    esac
+  done
 }
 
 # Claude

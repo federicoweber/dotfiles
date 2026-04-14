@@ -1,0 +1,144 @@
+#!/usr/bin/env bash
+# Email Hub multi-checkout helper.
+#
+# For plain/`-r` usage, prints the target directory on stdout so a shell
+# wrapper function can `cd` into it. For `-t`/`--tmux`, builds a 4-pane
+# tmux layout and exits without printing anything.
+
+set -euo pipefail
+
+print_help() {
+  cat <<'EOF'
+Usage: twn-p <N> [options]
+
+Switch to (or create) the townN multi-checkout project directory.
+
+Arguments:
+  N               Checkout number (e.g. 1, 2, 3)
+
+Options:
+  -r, --run       After cd, start the local convex backend
+  -t, --tmux      Open a 4-pane tmux layout for this project:
+                    - left: full-height pane running `claude`
+                    - right: 3 stacked panes; the top one runs
+                             `twn-p N --run` (local convex backend)
+                  Outside tmux: attaches to an existing TWN_N session
+                  if one exists, otherwise creates a new session
+                  named TWN_N.
+                  Inside tmux: creates a new window named TWN_N.
+                  If townN hasn't been checked out yet, the layout
+                  opens as a single pane that runs the setup script;
+                  the splits are created once setup succeeds.
+  -h, --help      Show this help
+
+Examples:
+  twn-p 2             cd to town2 in the current shell
+  twn-p 2 --run       same, then start the local convex backend
+  twn-p 2 --tmux      open a 4-pane tmux session/window for town2
+EOF
+}
+
+if [ $# -eq 0 ]; then
+  print_help >&2
+  exit 1
+fi
+
+case "$1" in
+  -h|--help) print_help; exit 0 ;;
+esac
+
+num="$1"
+shift
+use_tmux=false
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -t|--tmux) use_tmux=true ;;
+    -r|--run) ;;  # handled by the shell wrapper (needs shell state)
+    -h|--help) print_help; exit 0 ;;
+    *) echo "twn-p: unknown option: $1" >&2; exit 1 ;;
+  esac
+  shift
+done
+
+: "${TOWN_EMAIL_HUB_PROJECTS:=$HOME/agent_hub_projects}"
+dir="$TOWN_EMAIL_HUB_PROJECTS/town$num"
+
+if ! $use_tmux; then
+  if [ ! -d "$dir" ]; then
+    (cd "$HOME/email-hub" && scripts/setup-multi-checkout.sh -n "$num" --root-projects-dir "$TOWN_EMAIL_HUB_PROJECTS") >&2
+  fi
+  printf '%s\n' "$dir"
+  exit 0
+fi
+
+# --- --tmux: build the tmux layout ---------------------------------------
+command -v tmux >/dev/null 2>&1 || { echo "twn-p: tmux not found" >&2; exit 1; }
+name="TWN_$num"
+needs_setup=false
+[ -d "$dir" ] || needs_setup=true
+
+# When the target dir doesn't exist yet, start the pane in email-hub so the
+# setup script is right there; otherwise start in the project dir.
+if $needs_setup; then
+  start_dir="$HOME/email-hub"
+else
+  start_dir="$dir"
+fi
+
+attach_target=""
+if [ -n "${TMUX:-}" ]; then
+  tmux new-window -n "$name" -c "$start_dir"
+  p0=$(tmux display-message -p '#{pane_id}')
+elif tmux has-session -t "=$name" 2>/dev/null; then
+  # A session with this exact name already exists — just attach to it.
+  tmux attach-session -t "$name"
+  exit 0
+else
+  # No TWN_N session yet — create one. If another tmux server is already
+  # running, this new session lives alongside the existing ones.
+  p0=$(tmux new-session -d -s "$name" -n "$name" -c "$start_dir" -P -F '#{pane_id}')
+  attach_target="$name"
+fi
+
+do_splits() {
+  local p0="$1" p1 p2
+  # Left pane (p0) takes 60% of the horizontal space; right column (p1) 40%.
+  # The right column is then split into three equal thirds (~33% each).
+  p1=$(tmux split-window -h -l 40% -t "$p0" -c "$dir" -P -F '#{pane_id}')
+  p2=$(tmux split-window -v -l 66% -t "$p1" -c "$dir" -P -F '#{pane_id}')
+  tmux split-window -v -l 50% -t "$p2" -c "$dir"
+  tmux send-keys -t "$p0" 'clear && claude' C-m
+  tmux send-keys -t "$p1" "twn-p $num --run" C-m
+  tmux select-pane -t "$p0"
+}
+
+if $needs_setup; then
+  # Run setup inside the pane so the user sees it, then signal a wait channel.
+  # A backgrounded waiter performs the splits once setup succeeds, leaving
+  # the user free to watch the setup pane in the meantime.
+  signal="twnp_${num}_$$"
+  setup_cmd="scripts/setup-multi-checkout.sh -n $num --root-projects-dir \"\$TOWN_EMAIL_HUB_PROJECTS\" && cd \"$dir\"; tmux wait-for -S $signal"
+
+  # Start the waiter BEFORE sending the signal command — tmux channel signals
+  # are not buffered, so the waiter must be armed first.
+  (
+    tmux wait-for "$signal" 2>/dev/null || exit 0
+    [ -d "$dir" ] || exit 0
+    do_splits "$p0"
+  ) &
+  disown 2>/dev/null || true
+
+  tmux send-keys -t "$p0" "$setup_cmd" C-m
+
+  if [ -z "${TMUX:-}" ]; then
+    tmux attach-session -t "$attach_target"
+  fi
+  exit 0
+fi
+
+# Dir already exists: split right away.
+do_splits "$p0"
+if [ -z "${TMUX:-}" ]; then
+  tmux attach-session -t "$name"
+fi
+exit 0
