@@ -29,12 +29,16 @@ Options:
                   If townN hasn't been checked out yet, the layout
                   opens as a single pane that runs the setup script;
                   the splits are created once setup succeeds.
+  -k, --kill      Kill the TWN_N tmux session. Works from inside or
+                  outside the session (killing the session you're
+                  attached to will detach you).
   -h, --help      Show this help
 
 Examples:
   twn-p 2             cd to town2 in the current shell
   twn-p 2 --run       same, then start the local convex backend
   twn-p 2 --tmux      open a 4-pane tmux session/window for town2
+  twn-p 2 --kill      kill the TWN_2 tmux session
 EOF
 }
 
@@ -50,9 +54,11 @@ esac
 num="$1"
 shift
 use_tmux=false
+use_kill=false
 while [ $# -gt 0 ]; do
   case "$1" in
     -t|--tmux) use_tmux=true ;;
+    -k|--kill) use_kill=true ;;
     -r|--run) ;;  # handled by the shell wrapper (needs shell state)
     -h|--help) print_help; exit 0 ;;
     *) echo "twn-p: unknown option: $1" >&2; exit 1 ;;
@@ -60,7 +66,25 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-: "${TOWN_EMAIL_HUB_PROJECTS:=$HOME/agent_hub_projects}"
+if $use_kill; then
+  if $use_tmux; then
+    echo "twn-p: --kill cannot be combined with --tmux" >&2
+    exit 1
+  fi
+  command -v tmux >/dev/null 2>&1 || { echo "twn-p: tmux not found" >&2; exit 1; }
+  name="TWN_$num"
+  if ! tmux has-session -t "=$name" 2>/dev/null; then
+    echo "twn-p: no tmux session named $name" >&2
+    exit 1
+  fi
+  # Kill in the background so, if we're being killed along with our own
+  # session, the foreground command still returns cleanly before tmux tears
+  # the client down.
+  (tmux kill-session -t "=$name" >/dev/null 2>&1 &) 2>/dev/null
+  exit 0
+fi
+
+: "${TOWN_EMAIL_HUB_PROJECTS:=$HOME/town_projects}"
 dir="$TOWN_EMAIL_HUB_PROJECTS/town$num"
 
 if ! $use_tmux; then

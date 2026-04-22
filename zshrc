@@ -144,7 +144,7 @@ esac
 export PATH=/Users/federicoweber/.opperator/bin:$PATH
 
 # TOWN
-export TOWN_EMAIL_HUB_PROJECTS=~/agent_hub_projects
+export TOWN_EMAIL_HUB_PROJECTS=~/town_projects
 
 # Email Hub multi-checkout — thin wrapper around ~/bin/twn-p so we can cd
 # in the current shell. The script handles help, setup, and the tmux layout;
