@@ -128,8 +128,11 @@ fi
 
 # Open a second window in the same session running `gh dash`, then switch
 # focus back to the main window so the user lands on the claude pane.
-tmux new-window -t "$p0" -n "${name}_dash" -c "$start_dir" "gh dash"
-tmux select-window -t "$p0"
+# (new-window's -t needs a session/window target, not a pane id, so resolve
+# the session and window from p0 first.)
+read -r sess0 win0 < <(tmux display-message -p -t "$p0" '#{session_id} #{window_id}')
+tmux new-window -t "$sess0:" -n "${name}_dash" -c "$start_dir" "gh dash"
+tmux select-window -t "$win0"
 
 do_splits() {
   local p0="$1" p1 p2
