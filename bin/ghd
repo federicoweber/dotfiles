@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# `gh dash` wrapper that prepends a "Current Branch" prSection scoped to
+# the current git branch, so the default view shows the open PR(s) for
+# the branch you're on. Falls through to plain `gh dash` if you're not in
+# a git repo, on a detached HEAD, or the base config can't be read.
+#
+# Smart Filtering already adds `repo:<owner>/<name>` automatically, so
+# the injected filter doesn't need a `repo:` qualifier.
+#
+# When run inside tmux, a background watcher polls HEAD and respawns the
+# pane on branch change so the filter follows the active branch live.
+
+set -euo pipefail
+
+base_config="${GH_DASH_CONFIG:-$HOME/.config/gh-dash/config.yml}"
+
+current_branch() { git rev-parse --abbrev-ref HEAD 2>/dev/null || echo HEAD; }
+
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+  exec gh dash "$@"
+fi
+
+branch=$(current_branch)
+if [ -z "$branch" ] || [ "$branch" = "HEAD" ] || [ ! -f "$base_config" ]; then
+  exec gh dash "$@"
+fi
+
+tmp=$(mktemp -t gh-dash.XXXXXX) || exec gh dash "$@"
+cleanup() {
+  rm -f "$tmp"
+  [ -n "${watcher_pid:-}" ] && kill "$watcher_pid" 2>/dev/null || true
+}
+trap cleanup EXIT
+
+awk -v branch="$branch" '
+  !inserted && /^prSections:[[:space:]]*$/ {
+    print
+    print "    - title: Current Branch"
+    print "      filters: is:open head:" branch
+    inserted = 1
+    next
+  }
+  { print }
+' "$base_config" > "$tmp"
+
+if [ -n "${TMUX:-}" ] && [ -n "${TMUX_PANE:-}" ]; then
+  parent=$$
+  pane="$TMUX_PANE"
+  start_branch="$branch"
+  start_dir="$PWD"
+  (
+    while sleep 2; do
+      kill -0 "$parent" 2>/dev/null || exit 0
+      now=$(current_branch)
+      if [ "$now" != "$start_branch" ] && [ "$now" != "HEAD" ] && [ -n "$now" ]; then
+        tmux respawn-pane -k -c "$start_dir" -t "$pane" "ghd" 2>/dev/null || true
+        exit 0
+      fi
+    done
+  ) &
+  watcher_pid=$!
+fi
+
+exec gh dash --config "$tmp" "$@"

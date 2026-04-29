@@ -23,7 +23,7 @@ Options:
                     - right: 3 stacked panes; the top one runs
                              `twn-p N --run` (local convex backend)
                   A second window named TWN_N_dash is also created
-                  running `gh dash` (the GitHub PR/issue dashboard).
+                  running `ghd` (gh dash filtered to the current branch).
                   Outside tmux: attaches to an existing TWN_N session
                   if one exists, otherwise creates a new session
                   named TWN_N.
@@ -126,12 +126,13 @@ else
   attach_target="$name"
 fi
 
-# Open a second window in the same session running `gh dash`, then switch
-# focus back to the main window so the user lands on the claude pane.
+# Open a second window in the same session running `ghd` (gh dash scoped
+# to the current branch), then switch focus back to the main window so
+# the user lands on the claude pane.
 # (new-window's -t needs a session/window target, not a pane id, so resolve
 # the session and window from p0 first.)
 read -r sess0 win0 < <(tmux display-message -p -t "$p0" '#{session_id} #{window_id}')
-tmux new-window -t "$sess0:" -n "${name}_dash" -c "$start_dir" "gh dash"
+tmux new-window -t "$sess0:" -n "${name}_dash" -c "$start_dir" "ghd"
 tmux select-window -t "$win0"
 
 do_splits() {
