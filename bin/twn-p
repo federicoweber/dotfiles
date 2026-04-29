@@ -22,6 +22,8 @@ Options:
                     - left: full-height pane running `claude`
                     - right: 3 stacked panes; the top one runs
                              `twn-p N --run` (local convex backend)
+                  A second window named TWN_N_dash is also created
+                  running `gh dash` (the GitHub PR/issue dashboard).
                   Outside tmux: attaches to an existing TWN_N session
                   if one exists, otherwise creates a new session
                   named TWN_N.
@@ -123,6 +125,11 @@ else
   p0=$(tmux new-session -d -s "$name" -n "$name" -c "$start_dir" -P -F '#{pane_id}')
   attach_target="$name"
 fi
+
+# Open a second window in the same session running `gh dash`, then switch
+# focus back to the main window so the user lands on the claude pane.
+tmux new-window -t "$p0" -n "${name}_dash" -c "$start_dir" "gh dash"
+tmux select-window -t "$p0"
 
 do_splits() {
   local p0="$1" p1 p2

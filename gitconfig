@@ -4,12 +4,21 @@
 [core]
 	excludesfile = /home/fwd/.gitignore_global
 	editor = vim
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	line-numbers = true
+	dark = true
+	side-by-side = false
+	syntax-theme = Nord
+[merge]
+	conflictStyle = zdiff3
+	tool = vimdiff
 [mergetool]
 	path = /home/fwd/apps/nvim.appimage
-[merge]
-  tool = vimdiff
-[mergetool]
-  prompt = true
+	prompt = true
 [mergetool "vimdiff"]
   cmd = /home/fwd/apps/nvim.appimage -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [difftool]
