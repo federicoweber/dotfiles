@@ -83,7 +83,7 @@ keybindings:
         - key: alt+k
           builtin: pageUp
     prs:
-        - key: m
+        - key: M
           name: auto-merge (squash)
           command: gh pr merge --auto --squash --repo {{.RepoName}} {{.PrNumber}}
 repoPaths: {}
