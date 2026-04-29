@@ -3,7 +3,7 @@
 #
 # For plain/`-r` usage, prints the target directory on stdout so a shell
 # wrapper function can `cd` into it. For `-t`/`--tmux`, builds a 3-window
-# tmux layout (claude, dev, gh dash) and exits without printing anything.
+# tmux layout (claude, gh dash, dev) and exits without printing anything.
 
 set -euo pipefail
 
@@ -22,8 +22,8 @@ Options:
                     - TWN_N      claude (left); right column has live
                                  `git diff HEAD` via viddy on top and
                                  a free shell on the bottom
-                    - TWN_N_dash `ghd` (gh dash filtered to current branch)
-                    - TWN_N_dev  side-by-side panes
+                    - TWN_N_PR   `ghd` (gh dash filtered to current branch)
+                    - TWN_N_DEV  side-by-side panes
                         - left:  `twn-p N --run` (local convex backend)
                         - right: free shell
                   Outside tmux: attaches to an existing TWN_N session
@@ -31,7 +31,7 @@ Options:
                   named TWN_N.
                   Inside tmux: creates the windows in the current session.
                   If townN hasn't been checked out yet, only TWN_N opens
-                  to run the setup script; the dev and dash windows are
+                  to run the setup script; the PR and DEV windows are
                   created once setup succeeds.
   -k, --kill      Kill the TWN_N tmux session. Works from inside or
                   outside the session (killing the session you're
@@ -141,10 +141,10 @@ build_layout() {
   tmux select-pane -t "$p0"
 
   # Window 2: gh dash filtered to the current branch.
-  tmux new-window -t "$sess:" -n "${name}_dash" -c "$dir" "ghd"
+  tmux new-window -t "$sess:" -n "${name}_PR" -c "$dir" "ghd"
 
   # Window 3: dev — convex backend (left) + free shell (right), side-by-side.
-  dev_p0=$(tmux new-window -t "$sess:" -n "${name}_dev" -c "$dir" -P -F '#{pane_id}')
+  dev_p0=$(tmux new-window -t "$sess:" -n "${name}_DEV" -c "$dir" -P -F '#{pane_id}')
   tmux split-window -h -l 50% -t "$dev_p0" -c "$dir"
   tmux send-keys -t "$dev_p0" "twn-p $num --run" C-m
 
@@ -154,8 +154,8 @@ build_layout() {
 
 if $needs_setup; then
   # Run setup inside the pane so the user sees it, then signal a wait channel.
-  # A backgrounded waiter builds the dev and dash windows once setup
-  # succeeds, leaving the user free to watch the setup pane in the meantime.
+  # A backgrounded waiter builds the PR and DEV windows once setup succeeds,
+  # leaving the user free to watch the setup pane in the meantime.
   signal="twnp_${num}_$$"
   setup_cmd="scripts/setup-multi-checkout.sh -n $num --root-projects-dir \"\$TOWN_EMAIL_HUB_PROJECTS\" && cd \"$dir\"; tmux wait-for -S $signal"
 
