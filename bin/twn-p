@@ -2,8 +2,8 @@
 # Email Hub multi-checkout helper.
 #
 # For plain/`-r` usage, prints the target directory on stdout so a shell
-# wrapper function can `cd` into it. For `-t`/`--tmux`, builds a 4-pane
-# tmux layout and exits without printing anything.
+# wrapper function can `cd` into it. For `-t`/`--tmux`, builds a 3-window
+# tmux layout (claude, dev, gh dash) and exits without printing anything.
 
 set -euo pipefail
 
@@ -18,19 +18,21 @@ Arguments:
 
 Options:
   -r, --run       After cd, start the local convex backend
-  -t, --tmux      Open a 4-pane tmux layout for this project:
-                    - left: full-height pane running `claude`
-                    - right: 3 stacked panes; the top one runs
-                             `twn-p N --run` (local convex backend)
-                  A second window named TWN_N_dash is also created
-                  running `ghd` (gh dash filtered to the current branch).
+  -t, --tmux      Open a 3-window tmux layout for this project:
+                    - TWN_N      claude (left); right column has live
+                                 `git diff HEAD` via viddy on top and
+                                 a free shell on the bottom
+                    - TWN_N_dev  side-by-side panes
+                        - left:  `twn-p N --run` (local convex backend)
+                        - right: free shell
+                    - TWN_N_dash `ghd` (gh dash filtered to current branch)
                   Outside tmux: attaches to an existing TWN_N session
                   if one exists, otherwise creates a new session
                   named TWN_N.
-                  Inside tmux: creates a new window named TWN_N.
-                  If townN hasn't been checked out yet, the layout
-                  opens as a single pane that runs the setup script;
-                  the splits are created once setup succeeds.
+                  Inside tmux: creates the windows in the current session.
+                  If townN hasn't been checked out yet, only TWN_N opens
+                  to run the setup script; the dev and dash windows are
+                  created once setup succeeds.
   -k, --kill      Kill the TWN_N tmux session. Works from inside or
                   outside the session (killing the session you're
                   attached to will detach you).
@@ -39,7 +41,7 @@ Options:
 Examples:
   twn-p 2             cd to town2 in the current shell
   twn-p 2 --run       same, then start the local convex backend
-  twn-p 2 --tmux      open a 4-pane tmux session/window for town2
+  twn-p 2 --tmux      open the 3-window tmux layout for town2
   twn-p 2 --kill      kill the TWN_2 tmux session
 EOF
 }
@@ -126,31 +128,34 @@ else
   attach_target="$name"
 fi
 
-# Open a second window in the same session running `ghd` (gh dash scoped
-# to the current branch), then switch focus back to the main window so
-# the user lands on the claude pane.
-# (new-window's -t needs a session/window target, not a pane id, so resolve
-# the session and window from p0 first.)
-read -r sess0 win0 < <(tmux display-message -p -t "$p0" '#{session_id} #{window_id}')
-tmux new-window -t "$sess0:" -n "${name}_dash" -c "$start_dir" "ghd"
-tmux select-window -t "$win0"
+build_layout() {
+  local p0="$1" sess win0 diff_pane dev_p0
+  read -r sess win0 < <(tmux display-message -p -t "$p0" '#{session_id} #{window_id}')
 
-do_splits() {
-  local p0="$1" p1 p2
-  # Left pane (p0) takes 60% of the horizontal space; right column (p1) 40%.
-  # The right column is then split into three equal thirds (~33% each).
-  p1=$(tmux split-window -h -l 40% -t "$p0" -c "$dir" -P -F '#{pane_id}')
-  p2=$(tmux split-window -v -l 66% -t "$p1" -c "$dir" -P -F '#{pane_id}')
-  tmux split-window -v -l 50% -t "$p2" -c "$dir"
+  # Window 1: claude on the left (60%); right column (40%) split into
+  # viddy `git diff HEAD` on top (2/3) and a free shell on the bottom (1/3).
+  diff_pane=$(tmux split-window -h -l 40% -t "$p0" -c "$dir" -P -F '#{pane_id}')
+  tmux split-window -v -l 33% -t "$diff_pane" -c "$dir"
+  tmux send-keys -t "$diff_pane" "viddy -n 2 'git -c color.ui=always --no-pager diff HEAD'" C-m
   tmux send-keys -t "$p0" 'clear && claude' C-m
-  tmux send-keys -t "$p1" "twn-p $num --run" C-m
   tmux select-pane -t "$p0"
+
+  # Window 2: dev — convex backend (left) + free shell (right), side-by-side.
+  dev_p0=$(tmux new-window -t "$sess:" -n "${name}_dev" -c "$dir" -P -F '#{pane_id}')
+  tmux split-window -h -l 50% -t "$dev_p0" -c "$dir"
+  tmux send-keys -t "$dev_p0" "twn-p $num --run" C-m
+
+  # Window 3: gh dash filtered to the current branch.
+  tmux new-window -t "$sess:" -n "${name}_dash" -c "$dir" "ghd"
+
+  # Focus back on window 1 (claude).
+  tmux select-window -t "$win0"
 }
 
 if $needs_setup; then
   # Run setup inside the pane so the user sees it, then signal a wait channel.
-  # A backgrounded waiter performs the splits once setup succeeds, leaving
-  # the user free to watch the setup pane in the meantime.
+  # A backgrounded waiter builds the dev and dash windows once setup
+  # succeeds, leaving the user free to watch the setup pane in the meantime.
   signal="twnp_${num}_$$"
   setup_cmd="scripts/setup-multi-checkout.sh -n $num --root-projects-dir \"\$TOWN_EMAIL_HUB_PROJECTS\" && cd \"$dir\"; tmux wait-for -S $signal"
 
@@ -159,7 +164,7 @@ if $needs_setup; then
   (
     tmux wait-for "$signal" 2>/dev/null || exit 0
     [ -d "$dir" ] || exit 0
-    do_splits "$p0"
+    build_layout "$p0"
   ) &
   disown 2>/dev/null || true
 
@@ -171,8 +176,8 @@ if $needs_setup; then
   exit 0
 fi
 
-# Dir already exists: split right away.
-do_splits "$p0"
+# Dir already exists: build the layout right away.
+build_layout "$p0"
 if [ -z "${TMUX:-}" ]; then
   tmux attach-session -t "$name"
 fi
