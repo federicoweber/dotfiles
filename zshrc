@@ -150,15 +150,21 @@ export TOWN_EMAIL_HUB_PROJECTS=~/town_projects
 # in the current shell. The script handles help, setup, and the tmux layout;
 # cd and `--run` need shell state so they stay here.
 twn-p() {
-  local dir
+  local dir num
   dir=$(command twn-p "$@") || return $?
   [ -n "$dir" ] || return 0
   cd "$dir" || return 1
   local arg
   for arg in "$@"; do
     case "$arg" in
+      ''|*[!0-9]*) ;;
+      *) num="$arg" ;;
+    esac
+  done
+  for arg in "$@"; do
+    case "$arg" in
       -r|--run)
-        source "${NVM_DIR:-$HOME/.nvm}/nvm.sh" && nvm use && bun scripts/local-convex-backend.ts
+        source "${NVM_DIR:-$HOME/.nvm}/nvm.sh" && nvm use && bun scripts/local-convex-backend.ts ${num:+-n "$num"}
         return
         ;;
     esac
