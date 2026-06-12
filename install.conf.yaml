@@ -21,6 +21,7 @@
     ~/bin: bin
     ~/.spaceshiprc.zsh:
     ~/.claude/CLAUDE.md: claude/CLAUDE.md
+    ~/.claude/settings.json: claude/settings.json
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
