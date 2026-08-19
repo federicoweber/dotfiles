@@ -88,7 +88,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+pyenv commands 2>/dev/null | grep -qx virtualenv-init && eval "$(pyenv virtualenv-init -)"
 
 # Local Path
 export GOPATH="$HOME/Golang"
@@ -115,8 +115,6 @@ fi
 # OS Specific
 if [[ $OSTYPE == 'darwin'* ]]; then
   # OSX
-  echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/fwd/.zprofile
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/fwd/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
 elif grep -qi microsoft /proc/version; then
   # WSL
@@ -164,7 +162,13 @@ twn-p() {
   for arg in "$@"; do
     case "$arg" in
       -r|--run)
-        source "${NVM_DIR:-$HOME/.nvm}/nvm.sh" && nvm use && bun scripts/local-convex-backend.ts ${num:+-n "$num"}
+        # Toolchain is pinned in mise.toml (.nvmrc was removed in e561ab5352).
+        # Fall back to nvm for older pre-Mise checkouts that still ship .nvmrc.
+        if [ -x ./mise ]; then
+          ./mise run local-stack -- ${num:+-n "$num"}
+        else
+          source "${NVM_DIR:-$HOME/.nvm}/nvm.sh" && nvm use && bun scripts/local-convex-backend.ts ${num:+-n "$num"}
+        fi
         return
         ;;
     esac
