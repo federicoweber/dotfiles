@@ -2,7 +2,7 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "claude-fable-5[1m]",
+  "model": "opus[1m]",
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
     "context7@claude-plugins-official": true,
@@ -16,8 +16,140 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
+  "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-ansi",
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/federico/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/federico/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/federico/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/federico/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/federico/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/federico/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/federico/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/federico/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/federico/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/federico/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/federico/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/federico/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "TeammateIdle": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/federico/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/federico/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/federico/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/federico/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/federico/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/federico/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/federico/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/federico/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/federico/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/federico/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/federico/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "if [ -f '/Users/federico/.orca/agent-hooks/claude-statusline.sh' ] && [ -r '/Users/federico/.orca/agent-hooks/claude-statusline.sh' ] && [ -x '/Users/federico/.orca/agent-hooks/claude-statusline.sh' ]; then /bin/sh '/Users/federico/.orca/agent-hooks/claude-statusline.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi"
+  }
 }
