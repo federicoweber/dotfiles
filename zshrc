@@ -162,12 +162,18 @@ twn-p() {
   for arg in "$@"; do
     case "$arg" in
       -r|--run)
+        # zsh does not word-split unquoted expansions, so `${num:+-n "$num"}`
+        # passed a single `-n 2` argument; the stack ignored it and auto-picked
+        # the lowest free instance (i.e. 3010 instead of 3020). Use an array.
+        local -a nargs
+        nargs=()
+        [ -n "$num" ] && nargs=(-n "$num")
         # Toolchain is pinned in mise.toml (.nvmrc was removed in e561ab5352).
         # Fall back to nvm for older pre-Mise checkouts that still ship .nvmrc.
         if [ -x ./mise ]; then
-          ./mise run local-stack -- ${num:+-n "$num"}
+          ./mise run local-stack -- "${nargs[@]}"
         else
-          source "${NVM_DIR:-$HOME/.nvm}/nvm.sh" && nvm use && bun scripts/local-convex-backend.ts ${num:+-n "$num"}
+          source "${NVM_DIR:-$HOME/.nvm}/nvm.sh" && nvm use && bun scripts/local-convex-backend.ts "${nargs[@]}"
         fi
         return
         ;;
